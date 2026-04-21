@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>은아하다 로고 시안</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: #f5f5f5; }
+
+  .header {
+    text-align: center; padding: 60px 20px 40px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; letter-spacing: 6px; color: #333;
+  }
+  .header p { font-size: 0.85rem; color: #888; margin-top: 10px; }
+
+  .concepts {
+    display: flex; flex-direction: column; gap: 60px;
+    max-width: 1000px; margin: 0 auto; padding: 0 20px 80px;
+  }
+
+  .concept {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+  }
+  .concept-label {
+    padding: 20px 32px;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #8CB4D5; border-bottom: 1px solid #f0f0f0;
+  }
+
+  .logo-display {
+    display: flex; align-items: center; justify-content: center;
+    gap: 60px; padding: 60px 40px; flex-wrap: wrap;
+  }
+  .logo-box {
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px;
+  }
+  .logo-box.dark {
+    background: #1a1a1a; border-radius: 12px;
+  }
+  .logo-box.light {
+    background: #EEF5FA; border-radius: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>EUNA HADA — Logo Concepts</h1>
+  <p>은아하다 로고 시안 3종</p>
+</div>
+
+<div class="concepts">
+
+  <!-- CONCEPT 1: 미니멀 심볼 + 세리프 -->
+  <div class="concept">
+    <div class="concept-label">Concept A — Minimal Droplet + Serif</div>
+    <div class="logo-display">
+      <!-- Light -->
+      <div class="logo-box light">
+        <svg width="280" height="80" viewBox="0 0 280 80">
+          <!-- Droplet symbol - 왁스 한 방울 + 잎사귀 곡선 -->
+          <g transform="translate(10, 8)">
+            <!-- Outer droplet -->
+            <path d="M30 8 C30 8, 14 28, 14 40 C14 50, 20 58, 30 58 C40 58, 46 50, 46 40 C46 28, 30 8, 30 8Z"
+                  fill="none" stroke="#6A9BC0" stroke-width="1.5"/>
+            <!-- Inner curve - 피부결 라인 -->
+            <path d="M24 30 Q30 42, 36 30" fill="none" stroke="#8CB4D5" stroke-width="1" opacity="0.6"/>
+            <circle cx="30" cy="24" r="1.5" fill="#8CB4D5" opacity="0.5"/>
+          </g>
+          <!-- Text -->
+          <text x="65" y="38" font-family="'Cormorant Garamond', serif" font-size="28" font-weight="400" letter-spacing="5" fill="#1A1A1A">EUNA</text>
+          <text x="168" y="38" font-family="'Cormorant Garamond', serif" font-size="28" font-weight="300" letter-spacing="5" fill="#8CB4D5">HADA</text>
+          <text x="65" y="58" font-family="'Noto Sans KR', sans-serif" font-size="8" letter-spacing="4" fill="#888" font-weight="300">은 아 하 다  ·  B E A U T Y</text>
+        </svg>
+      </div>
+      <!-- Dark -->
+      <div class="logo-box dark">
+        <svg width="280" height="80" viewBox="0 0 280 80">
+          <g transform="translate(10, 8)">
+            <path d="M30 8 C30 8, 14 28, 14 40 C14 50, 20 58, 30 58 C40 58, 46 50, 46 40 C46 28, 30 8, 30 8Z"
+                  fill="none" stroke="#8CB4D5" stroke-width="1.5"/>
+            <path d="M24 30 Q30 42, 36 30" fill="none" stroke="#8CB4D5" stroke-width="1" opacity="0.5"/>
+            <circle cx="30" cy="24" r="1.5" fill="#8CB4D5" opacity="0.5"/>
+          </g>
+          <text x="65" y="38" font-family="'Cormorant Garamond', serif" font-size="28" font-weight="400" letter-spacing="5" fill="#FAFAFA">EUNA</text>
+          <text x="168" y="38" font-family="'Cormorant Garamond', serif" font-size="28" font-weight="300" letter-spacing="5" fill="#8CB4D5">HADA</text>
+          <text x="65" y="58" font-family="'Noto Sans KR', sans-serif" font-size="8" letter-spacing="4" fill="#777" font-weight="300">은 아 하 다  ·  B E A U T Y</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 2: 모노그램 EH -->
+  <div class="concept">
+    <div class="concept-label">Concept B — Monogram EH</div>
+    <div class="logo-display">
+      <!-- Light -->
+      <div class="logo-box light">
+        <svg width="300" height="90" viewBox="0 0 300 90">
+          <!-- EH Monogram in circle -->
+          <g transform="translate(10, 5)">
+            <circle cx="38" cy="40" r="34" fill="none" stroke="#8CB4D5" stroke-width="1.2"/>
+            <!-- E -->
+            <text x="22" y="50" font-family="'Cormorant Garamond', serif" font-size="32" font-weight="300" fill="#6A9BC0" letter-spacing="0">E</text>
+            <!-- H - overlapping -->
+            <text x="37" y="50" font-family="'Cormorant Garamond', serif" font-size="32" font-weight="300" fill="#1A1A1A" letter-spacing="0">H</text>
+            <!-- Thin line accent -->
+            <line x1="20" y1="58" x2="56" y2="58" stroke="#8CB4D5" stroke-width="0.5" opacity="0.4"/>
+          </g>
+          <!-- Text -->
+          <text x="90" y="36" font-family="'Cormorant Garamond', serif" font-size="24" font-weight="400" letter-spacing="8" fill="#1A1A1A">EUNA HADA</text>
+          <line x1="90" y1="46" x2="280" y2="46" stroke="#8CB4D5" stroke-width="0.5" opacity="0.3"/>
+          <text x="90" y="62" font-family="'Noto Sans KR', sans-serif" font-size="8.5" letter-spacing="3" fill="#888" font-weight="300">프리미엄 뷰티 브랜드</text>
+        </svg>
+      </div>
+      <!-- Dark -->
+      <div class="logo-box dark">
+        <svg width="300" height="90" viewBox="0 0 300 90">
+          <g transform="translate(10, 5)">
+            <circle cx="38" cy="40" r="34" fill="none" stroke="#8CB4D5" stroke-width="1.2"/>
+            <text x="22" y="50" font-family="'Cormorant Garamond', serif" font-size="32" font-weight="300" fill="#8CB4D5" letter-spacing="0">E</text>
+            <text x="37" y="50" font-family="'Cormorant Garamond', serif" font-size="32" font-weight="300" fill="#FAFAFA" letter-spacing="0">H</text>
+            <line x1="20" y1="58" x2="56" y2="58" stroke="#8CB4D5" stroke-width="0.5" opacity="0.3"/>
+          </g>
+          <text x="90" y="36" font-family="'Cormorant Garamond', serif" font-size="24" font-weight="400" letter-spacing="8" fill="#FAFAFA">EUNA HADA</text>
+          <line x1="90" y1="46" x2="280" y2="46" stroke="#8CB4D5" stroke-width="0.5" opacity="0.2"/>
+          <text x="90" y="62" font-family="'Noto Sans KR', sans-serif" font-size="8.5" letter-spacing="3" fill="#777" font-weight="300">프리미엄 뷰티 브랜드</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 3: 추상 곡선 + 타이포 -->
+  <div class="concept">
+    <div class="concept-label">Concept C — Abstract Curves</div>
+    <div class="logo-display">
+      <!-- Light -->
+      <div class="logo-box light">
+        <svg width="300" height="85" viewBox="0 0 300 85">
+          <!-- Abstract flowing curves - 피부/아름다움 -->
+          <g transform="translate(8, 8)">
+            <!-- Outer arc -->
+            <path d="M10 50 Q25 5, 45 25 Q60 42, 40 55 Q25 65, 10 50Z"
+                  fill="none" stroke="#8CB4D5" stroke-width="1.2"/>
+            <!-- Inner flowing line -->
+            <path d="M18 42 Q30 18, 42 35"
+                  fill="none" stroke="#6A9BC0" stroke-width="0.8" opacity="0.5"/>
+            <!-- Accent dot -->
+            <circle cx="38" cy="22" r="2" fill="#8CB4D5" opacity="0.4"/>
+            <!-- Second smaller petal -->
+            <path d="M38 30 Q50 15, 55 35 Q58 48, 45 50"
+                  fill="none" stroke="#8CB4D5" stroke-width="0.8" opacity="0.35"/>
+          </g>
+          <!-- Text -->
+          <text x="78" y="32" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="500" letter-spacing="6" fill="#1A1A1A">EUNA</text>
+          <text x="78" y="60" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="300" letter-spacing="6" fill="#8CB4D5">HADA</text>
+          <!-- Vertical line separator -->
+          <line x1="70" y1="14" x2="70" y2="68" stroke="#8CB4D5" stroke-width="0.8" opacity="0.3"/>
+        </svg>
+      </div>
+      <!-- Dark -->
+      <div class="logo-box dark">
+        <svg width="300" height="85" viewBox="0 0 300 85">
+          <g transform="translate(8, 8)">
+            <path d="M10 50 Q25 5, 45 25 Q60 42, 40 55 Q25 65, 10 50Z"
+                  fill="none" stroke="#8CB4D5" stroke-width="1.2"/>
+            <path d="M18 42 Q30 18, 42 35"
+                  fill="none" stroke="#8CB4D5" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="38" cy="22" r="2" fill="#8CB4D5" opacity="0.4"/>
+            <path d="M38 30 Q50 15, 55 35 Q58 48, 45 50"
+                  fill="none" stroke="#8CB4D5" stroke-width="0.8" opacity="0.3"/>
+          </g>
+          <text x="78" y="32" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="500" letter-spacing="6" fill="#FAFAFA">EUNA</text>
+          <text x="78" y="60" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="300" letter-spacing="6" fill="#8CB4D5">HADA</text>
+          <line x1="70" y1="14" x2="70" y2="68" stroke="#8CB4D5" stroke-width="0.8" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

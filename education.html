@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== EDUCATION PAGE STYLES ===== */
+
+  /* INTRO */
+  #edu-intro {
+    text-align: center;
+  }
+  #edu-intro .section-desc { margin: 0 auto; }
+
+  /* PROGRAMS */
+  #programs {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+  }
+  .program-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 40px; max-width: 1000px; margin: 0 auto;
+  }
+  .program-card {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(140,180,213,0.12);
+    padding: 48px 36px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  .program-card:hover {
+    background: #fff;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(140,180,213,0.18);
+  }
+  .program-badge {
+    display: inline-block;
+    font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--blue-dark); border: 1px solid var(--blue);
+    padding: 4px 14px; margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  .program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 14px;
+  }
+  .program-desc {
+    font-size: 0.85rem; color: var(--gray); line-height: 1.8; font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .program-details {
+    list-style: none;
+  }
+  .program-details li {
+    font-size: 0.8rem; color: var(--gray); font-weight: 300;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-light);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .program-details li::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--blue); border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* BROWXING FEATURE */
+  #browxing {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .browxing-visual {
+    height: 480px; background: var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; color: var(--blue-dark); opacity: 0.25;
+    letter-spacing: 6px;
+  }
+  .browxing-stats {
+    display: flex; gap: 40px; margin-top: 32px;
+  }
+  .browxing-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--blue-dark); font-weight: 400;
+  }
+  .browxing-stat-label {
+    font-size: 0.72rem; color: var(--gray); letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  /* PARTNERS */
+  #partners {
+    background: linear-gradient(180deg, #F4F7FA, var(--white));
+    text-align: center;
+  }
+  #partners .section-desc { margin: 0 auto 50px; }
+  .partner-logos {
+    display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;
+    max-width: 900px; margin: 0 auto;
+  }
+  .partner-logo {
+    width: 140px; height: 80px;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid var(--gray-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--gray); letter-spacing: 1px;
+    transition: all 0.3s;
+    border-radius: 8px;
+  }
+  .partner-logo:hover {
+    border-color: var(--blue);
+    box-shadow: 0 8px 30px rgba(140,180,213,0.12);
+  }
+
+  /* TESTIMONIAL */
+  #testimonials {
+    text-align: center;
+  }
+  #testimonials .section-desc { margin: 0 auto 60px; }
+  .testimonial-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; max-width: 1000px; margin: 0 auto;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(140,180,213,0.1);
+    padding: 36px 28px; text-align: left;
+    border-radius: 12px;
+  }
+  .testimonial-text {
+    font-size: 0.85rem; color: var(--gray); line-height: 1.8;
+    font-weight: 300; font-style: italic; margin-bottom: 20px;
+  }
+  .testimonial-name {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.5px;
+  }
+  .testimonial-role {
+    font-size: 0.72rem; color: var(--gray); letter-spacing: 1px;
+  }
+
+  @media (max-width: 900px) {
+    .program-grid { grid-template-columns: 1fr; max-width: 500px; }
+    #browxing { grid-template-columns: 1fr; gap: 40px; }
+    .browxing-visual { height: 280px; }
+    .testimonial-grid { grid-template-columns: 1fr; max-width: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="waxing.html">Waxing</a></li>
+    <li><a href="education.html" class="active">Education</a></li>
+    <li><a href="product.html">Products</a></li>
+  </ul>
+  <a href="index.html#cta" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Education &amp; Partnership</p>
+    <h1 class="page-hero-title">For <em>Professionals</em></h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">뷰티 전문가와 함께 성장하는 파트너십</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="edu-intro">
+  <p class="section-tag reveal">Why Euna Hada</p>
+  <h2 class="section-title reveal">뷰티 비즈니스의 파트너</h2>
+  <p class="section-desc reveal">
+    은아하다는 전국 100개 이상의 뷰티샵과 함께하며,
+    Browxing 두피 문신 기기 공급, 왁싱 창업 교육, B2B 제품 파트너십을 통해
+    뷰티 전문가들의 성장을 돕고 있습니다.
+  </p>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <p class="section-tag reveal" style="text-align:center;">Programs</p>
+  <h2 class="section-title reveal" style="text-align:center;">교육 프로그램</h2>
+  <div class="program-grid">
+
+    <div class="program-card reveal reveal-delay-1" data-tilt>
+      <span class="program-badge">Browxing</span>
+      <h3 class="program-name">Browxing 머신 교육</h3>
+      <p class="program-desc">
+        반영구 문신 머신 Browxing의 도입부터 실전 활용까지.
+        눈썹·입술·두피·가르마 시술로 매장 서비스를 확장하세요.
+      </p>
+      <ul class="program-details">
+        <li>기기 사용법 및 테크닉 교육</li>
+        <li>시술 안전 가이드라인</li>
+        <li>마케팅 및 고객 상담 노하우</li>
+        <li>사후 A/S 및 지속 지원</li>
+      </ul>
+    </div>
+
+    <div class="program-card reveal reveal-delay-2" data-tilt>
+      <span class="program-badge">Startup</span>
+      <h3 class="program-name">왁싱 창업 컨설팅</h3>
+      <p class="program-desc">
+        왁싱 전문점 창업을 꿈꾸는 분들을 위한 A to Z 컨설팅.
+        8년 경험에서 나온 실전 노하우를 전수합니다.
+      </p>
+      <ul class="program-details">
+        <li>매장 인테리어 및 동선 설계</li>
+        <li>제품 선정 및 원가 관리</li>
+        <li>시술 테크닉 집중 교육</li>
+        <li>SNS 마케팅 전략</li>
+      </ul>
+    </div>
+
+    <div class="program-card reveal reveal-delay-3" data-tilt>
+      <span class="program-badge">B2B</span>
+      <h3 class="program-name">ClearWax 파트너십</h3>
+      <p class="program-desc">
+        은아하다의 프리미엄 왁스 제품 ClearWax를 매장에서 판매하세요.
+        파트너 전용 가격과 마케팅 지원을 제공합니다.
+      </p>
+      <ul class="program-details">
+        <li>파트너 전용 도매가</li>
+        <li>제품 교육 및 샘플 제공</li>
+        <li>공동 마케팅 지원</li>
+        <li>전용 브랜딩 패키지</li>
+      </ul>
+    </div>
+
+    <div class="program-card reveal reveal-delay-4" data-tilt>
+      <span class="program-badge">Advanced</span>
+      <h3 class="program-name">Browxing + 왁싱 통합</h3>
+      <p class="program-desc">
+        Browxing과 왁싱을 함께 배우는 통합 과정.
+        매장의 서비스 라인업을 한번에 확장하세요.
+      </p>
+      <ul class="program-details">
+        <li>Browxing 기본 + 심화 과정</li>
+        <li>왁싱 테크닉 보수 교육</li>
+        <li>통합 메뉴 구성 전략</li>
+        <li>수료 후 파트너 등록</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- BROWXING FEATURE -->
+<section id="browxing">
+  <div class="browxing-visual reveal">Browxing</div>
+  <div>
+    <p class="section-tag reveal">Featured</p>
+    <h2 class="section-title reveal">Browxing이란?</h2>
+    <p class="section-desc reveal">
+      Browxing은 눈썹, 입술, 두피, 가르마 등 다양한 부위에 사용할 수 있는
+      <strong>반영구 문신 머신</strong>입니다.
+      은아하다가 전국에 공급하며, 현재 100개 이상의 뷰티샵에서 사용 중입니다.
+    </p>
+    <div class="browxing-stats reveal">
+      <div>
+        <div class="browxing-stat-num">100+</div>
+        <div class="browxing-stat-label">도입 매장</div>
+      </div>
+      <div>
+        <div class="browxing-stat-num">전국</div>
+        <div class="browxing-stat-label">서비스 지역</div>
+      </div>
+      <div>
+        <div class="browxing-stat-num">A/S</div>
+        <div class="browxing-stat-label">사후 지원</div>
+      </div>
+    </div>
+    <a href="index.html#cta" class="link-btn reveal">도입 상담하기 →</a>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <p class="section-tag reveal">Partners</p>
+  <h2 class="section-title reveal">함께하는 파트너</h2>
+  <p class="section-desc reveal">전국 100개 이상의 뷰티샵이 은아하다와 함께합니다</p>
+  <div class="partner-logos">
+    <div class="partner-logo reveal reveal-delay-1">Partner 1</div>
+    <div class="partner-logo reveal reveal-delay-2">Partner 2</div>
+    <div class="partner-logo reveal reveal-delay-3">Partner 3</div>
+    <div class="partner-logo reveal reveal-delay-4">Partner 4</div>
+    <div class="partner-logo reveal reveal-delay-1">Partner 5</div>
+    <div class="partner-logo reveal reveal-delay-2">Partner 6</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-tag reveal">Reviews</p>
+  <h2 class="section-title reveal">파트너 후기</h2>
+  <p class="section-desc reveal">은아하다와 함께한 원장님들의 이야기</p>
+  <div class="testimonial-grid">
+    <div class="testimonial-card reveal reveal-delay-1">
+      <p class="testimonial-text">
+        "Browxing 도입 후 매출이 눈에 띄게 올랐어요.
+        두피 고민 고객층이 새로 유입되면서 매장 분위기가 달라졌습니다."
+      </p>
+      <p class="testimonial-name">김○○ 원장</p>
+      <p class="testimonial-role">서울 강남구 뷰티샵</p>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <p class="testimonial-text">
+        "창업 컨설팅 덕분에 시행착오 없이 매장을 오픈할 수 있었어요.
+        실전 경험에서 나온 노하우가 정말 달랐습니다."
+      </p>
+      <p class="testimonial-name">이○○ 원장</p>
+      <p class="testimonial-role">부산 해운대구 왁싱 전문점</p>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-3">
+      <p class="testimonial-text">
+        "ClearWax 파트너십으로 고객 재방문율이 높아졌어요.
+        제품 품질이 좋으니 자연스럽게 추천이 됩니다."
+      </p>
+      <p class="testimonial-name">박○○ 원장</p>
+      <p class="testimonial-role">대구 수성구 뷰티 살롱</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Partnership</p>
+    <h2 class="cta-title reveal">교육 및 파트너십 상담</h2>
+    <p class="cta-desc reveal">은아하다와 함께 성장할 파트너를 찾습니다</p>
+    <a href="tel:010-9944-7901" class="cta-btn reveal">상담 문의</a>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script src="js/common.js"></script>
+</body>
+</html>

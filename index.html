@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Euna Hada — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== HOME-ONLY STYLES ===== */
+
+  /* HERO */
+  #hero {
+    position: relative; height: 100vh; display: flex;
+    align-items: center; justify-content: center;
+    overflow: hidden; background: linear-gradient(180deg, #FFFFFF 0%, #EEF5FA 100%);
+  }
+  #hero-canvas {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1; opacity: 0.8;
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center; color: var(--black);
+  }
+  .hero-sub {
+    font-size: 0.85rem; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 20px;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 300;
+    letter-spacing: 12px; line-height: 1.1;
+    opacity: 0; transform: translateY(40px);
+    animation: fadeUp 1.2s 0.8s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--blue); }
+  .hero-line {
+    width: 60px; height: 1px; background: var(--blue);
+    margin: 30px auto;
+    opacity: 0; animation: fadeUp 1s 1.2s forwards;
+  }
+  .hero-desc {
+    font-size: 0.95rem; font-weight: 300; letter-spacing: 2px; color: var(--gray);
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1s 1.4s forwards;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    z-index: 2; color: var(--blue-dark); opacity: 0.5; font-size: 0.7rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    animation: pulse 2s infinite;
+  }
+  .hero-scroll::after {
+    content: ''; display: block; width: 1px; height: 40px;
+    background: var(--blue); margin: 10px auto 0; opacity: 0.5;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ABOUT PREVIEW */
+  #about-preview {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    background: var(--white);
+  }
+  .about-visual {
+    position: relative; height: 500px;
+    background: var(--blue-light);
+    overflow: hidden;
+  }
+  .about-visual-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem; color: var(--blue-dark); opacity: 0.3;
+    letter-spacing: 8px;
+  }
+  .about-stats {
+    display: flex; gap: 40px; margin-top: 40px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 400; color: var(--blue-dark);
+  }
+  .stat-label {
+    font-size: 0.72rem; color: var(--gray); letter-spacing: 2px;
+    text-transform: uppercase; margin-top: 4px;
+  }
+
+  /* SERVICES PREVIEW */
+  #services-preview {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+    text-align: center;
+  }
+  #services-preview .section-desc { color: var(--gray); margin: 0 auto 60px; }
+  .service-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; max-width: 1100px; margin: 0 auto;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(140,180,213,0.15);
+    padding: 50px 35px;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+    perspective: 800px;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0; transition: opacity 0.5s;
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover {
+    background: #fff;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(140,180,213,0.18);
+  }
+  .service-icon {
+    width: 50px; height: 50px; margin: 0 auto 24px;
+    border: 1px solid var(--blue); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: var(--blue);
+    transition: all 0.4s;
+  }
+  .service-card:hover .service-icon {
+    background: var(--blue); color: #fff;
+    box-shadow: 0 0 30px rgba(140,180,213,0.3);
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; letter-spacing: 2px;
+    margin-bottom: 14px; color: var(--black);
+  }
+  .service-desc {
+    font-size: 0.82rem; color: var(--gray);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  /* PRODUCTS PREVIEW */
+  #products-preview { text-align: center; background: var(--white); }
+  #products-preview .section-desc { margin: 0 auto 60px; }
+  .product-showcase {
+    display: flex; justify-content: center; gap: 50px;
+    flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+  }
+  .product-card {
+    width: 280px; perspective: 1000px; cursor: pointer;
+  }
+  .product-card-inner {
+    position: relative; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+  }
+  .product-img {
+    width: 280px; height: 360px;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; color: var(--blue-dark); letter-spacing: 4px;
+    border: 1px solid var(--gray-light);
+    transition: all 0.5s;
+  }
+  .product-card:hover .product-img {
+    box-shadow: 0 25px 60px rgba(140,180,213,0.2);
+  }
+  .product-name {
+    margin-top: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; letter-spacing: 2px;
+  }
+  .product-price {
+    font-size: 0.82rem; color: var(--blue-dark); margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* EDUCATION PREVIEW */
+  #education-preview {
+    background: linear-gradient(180deg, #F4F7FA, var(--white));
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .edu-features { list-style: none; margin-top: 36px; }
+  .edu-features li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--gray-light);
+    display: flex; align-items: center; gap: 16px;
+    font-size: 0.9rem; font-weight: 300;
+    transition: all 0.3s;
+  }
+  .edu-features li:hover { padding-left: 12px; color: var(--blue-dark); }
+  .edu-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--blue); flex-shrink: 0;
+  }
+  .edu-visual {
+    position: relative; height: 480px;
+  }
+  #edu-canvas { width: 100%; height: 100%; }
+
+  /* RESPONSIVE HOME */
+  @media (max-width: 900px) {
+    #about-preview, #education-preview { grid-template-columns: 1fr; gap: 40px; }
+    .service-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .about-visual { height: 300px; }
+    .product-showcase { gap: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="waxing.html">Waxing</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="product.html">Products</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Contact</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-sub">Premium Waxing &amp; Beauty</p>
+    <h1 class="hero-title">Eun A <em>Hada.</em></h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">은아하다 — 아름다움의 새로운 기준</p>
+  </div>
+  <div class="hero-scroll">Scroll<br></div>
+</section>
+
+<!-- ===== ABOUT PREVIEW ===== -->
+<section id="about-preview">
+  <div class="about-visual">
+    <div class="about-visual-inner" id="aboutVisual">E · H</div>
+  </div>
+  <div>
+    <p class="section-tag reveal">About Us</p>
+    <h2 class="section-title reveal">당신의 아름다움,<br>은아하다가 완성합니다</h2>
+    <p class="section-desc reveal">
+      전문 왁싱 서비스부터 프리미엄 셀프 왁싱 제품 ClearWax,
+      그리고 뷰티 전문가를 위한 Browxing 교육까지.
+      은아하다는 아름다움의 모든 영역을 아우르는 뷰티 브랜드입니다.
+    </p>
+    <div class="about-stats reveal">
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3,000+</div>
+        <div class="stat-label">Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Partners</div>
+      </div>
+    </div>
+    <a href="about.html" class="link-btn reveal">더 알아보기 →</a>
+  </div>
+</section>
+
+<!-- ===== SERVICES PREVIEW ===== -->
+<section id="services-preview">
+  <p class="section-tag reveal">Services</p>
+  <h2 class="section-title reveal">Our Expertise</h2>
+  <p class="section-desc reveal">전문성과 정성을 담은 프리미엄 왁싱 서비스</p>
+  <div class="service-grid">
+    <div class="service-card reveal reveal-delay-1" data-tilt>
+      <div class="service-icon">✦</div>
+      <h3 class="service-name">Face Waxing</h3>
+      <p class="service-desc">
+        섬세한 터치로 완성하는 페이스 왁싱.
+        눈썹, 인중, 이마 라인까지 꼼꼼하게.
+      </p>
+    </div>
+    <div class="service-card reveal reveal-delay-2" data-tilt>
+      <div class="service-icon">✦</div>
+      <h3 class="service-name">Body Waxing</h3>
+      <p class="service-desc">
+        팔, 다리, 겨드랑이 등 바디 전체.
+        부드럽고 깨끗한 피부를 경험하세요.
+      </p>
+    </div>
+    <div class="service-card reveal reveal-delay-3" data-tilt>
+      <div class="service-icon">✦</div>
+      <h3 class="service-name">Brazilian</h3>
+      <p class="service-desc">
+        프라이빗한 공간에서 편안하게.
+        숙련된 전문가의 안전한 시술.
+      </p>
+    </div>
+  </div>
+  <a href="waxing.html" class="link-btn reveal">전체 서비스 보기 →</a>
+</section>
+
+<!-- ===== PRODUCTS PREVIEW ===== -->
+<section id="products-preview">
+  <p class="section-tag reveal">Products</p>
+  <h2 class="section-title reveal">ClearWax Collection</h2>
+  <p class="section-desc reveal">프로가 만든 셀프 왁싱 제품, 집에서도 살롱 퀄리티를</p>
+  <div class="product-showcase">
+    <div class="product-card reveal reveal-delay-1">
+      <div class="product-card-inner" data-product-tilt>
+        <div class="product-img">CW</div>
+      </div>
+      <p class="product-name">ClearWax Original</p>
+      <p class="product-price">카카오톡 문의</p>
+    </div>
+    <div class="product-card reveal reveal-delay-2">
+      <div class="product-card-inner" data-product-tilt>
+        <div class="product-img">CW+</div>
+      </div>
+      <p class="product-name">ClearWax Sensitive</p>
+      <p class="product-price">카카오톡 문의</p>
+    </div>
+    <div class="product-card reveal reveal-delay-3">
+      <div class="product-card-inner" data-product-tilt>
+        <div class="product-img">Kit</div>
+      </div>
+      <p class="product-name">Home Waxing Kit</p>
+      <p class="product-price">카카오톡 문의</p>
+    </div>
+  </div>
+  <a href="product.html" class="link-btn reveal">제품 더보기 →</a>
+</section>
+
+<!-- ===== EDUCATION PREVIEW ===== -->
+<section id="education-preview">
+  <div>
+    <p class="section-tag reveal">For Professionals</p>
+    <h2 class="section-title reveal">뷰티 전문가를 위한<br>파트너십</h2>
+    <p class="section-desc reveal">
+      반영구 문신 머신 Browxing 공급부터 왁싱 창업 교육까지,
+      전국 100개 이상의 뷰티샵과 함께합니다.
+    </p>
+    <ul class="edu-features reveal">
+      <li><span class="edu-dot"></span>Browxing 기기 도입 &amp; 교육</li>
+      <li><span class="edu-dot"></span>왁싱 창업 컨설팅</li>
+      <li><span class="edu-dot"></span>ClearWax B2B 파트너십</li>
+      <li><span class="edu-dot"></span>Browxing + 왁싱 통합 과정</li>
+    </ul>
+    <a href="education.html" class="link-btn reveal">교육 상담하기 →</a>
+  </div>
+  <div class="edu-visual">
+    <canvas id="edu-canvas"></canvas>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta" class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Get in Touch</p>
+    <h2 class="cta-title reveal">상담 및 예약</h2>
+    <p class="cta-desc reveal">은아하다와 함께 아름다움을 시작하세요</p>
+    <a href="tel:010-9944-7901" class="cta-btn reveal">예약 문의</a>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<!-- ===== THREE.JS ===== -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+// =====================================================
+// 1) HERO — Floating torus rings
+// =====================================================
+(() => {
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 6, 18);
+  camera.lookAt(0, 0, 0);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+  const dirLight = new THREE.DirectionalLight(0x8CB4D5, 0.6);
+  dirLight.position.set(5, 10, 5);
+  scene.add(dirLight);
+
+  // Floating torus rings — fixed positions
+  const ringData = [
+    { r: 5.0, tube: 0.03, opacity: 0.12, rx: 0.6, ry: 1.2, rz: 0, px: -2.0, py: 0.5, pz: -1, srx: 0.0008, sry: -0.001, fo: 0 },
+    { r: 4.2, tube: 0.035, opacity: 0.10, rx: 1.8, ry: 0.5, rz: 0, px: 1.5, py: -0.8, pz: 0.5, srx: -0.0006, sry: 0.0008, fo: 1.2 },
+    { r: 4.0, tube: 0.025, opacity: 0.09, rx: 0.3, ry: 2.5, rz: 0, px: 3.0, py: 1.0, pz: -0.5, srx: 0.001, sry: 0.0005, fo: 2.5 },
+    { r: 3.5, tube: 0.04, opacity: 0.14, rx: 2.2, ry: 0.8, rz: 0, px: -3.0, py: -0.5, pz: 1, srx: -0.0005, sry: -0.0007, fo: 3.8 },
+    { r: 4.8, tube: 0.03, opacity: 0.11, rx: 1.0, ry: 1.8, rz: 0, px: 0.5, py: 0.2, pz: -1.5, srx: 0.0007, sry: 0.0009, fo: 5.0 },
+  ];
+  const rings = [];
+  ringData.forEach(d => {
+    const geo = new THREE.TorusGeometry(d.r, d.tube, 16, 80);
+    const mat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color('#8CB4D5'),
+      transparent: true,
+      opacity: d.opacity,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.rotation.set(d.rx, d.ry, d.rz);
+    mesh.position.set(d.px, d.py, d.pz);
+    scene.add(mesh);
+    rings.push({
+      mesh,
+      rx: d.srx,
+      ry: d.sry,
+      floatOffset: d.fo,
+      baseY: d.py,
+    });
+  });
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function animateHero(time) {
+    requestAnimationFrame(animateHero);
+    rings.forEach(r => {
+      r.mesh.rotation.x += r.rx;
+      r.mesh.rotation.y += r.ry;
+      r.mesh.position.y = r.baseY + Math.sin(time * 0.0005 + r.floatOffset) * 0.6;
+    });
+    camera.position.x += (mouseX * 3 - camera.position.x) * 0.015;
+    camera.position.y += (-mouseY * 2 - camera.position.y) * 0.015;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  }
+  animateHero(0);
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+
+// =====================================================
+// 2) EDUCATION PREVIEW — Floating 3D Geometry
+// =====================================================
+(() => {
+  const canvas = document.getElementById('edu-canvas');
+  if (!canvas) return;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(rect.width, rect.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, rect.width / rect.height, 0.1, 100);
+  camera.position.z = 12;
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+  const dirLight = new THREE.DirectionalLight(0x8CB4D5, 1.2);
+  dirLight.position.set(5, 5, 5);
+  scene.add(dirLight);
+
+  const shapes = [];
+  const geos = [
+    new THREE.IcosahedronGeometry(1.5, 0),
+    new THREE.OctahedronGeometry(1.2, 0),
+    new THREE.TorusGeometry(1, 0.35, 16, 32),
+    new THREE.TetrahedronGeometry(1, 0),
+  ];
+
+  geos.forEach((g, i) => {
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: i % 2 === 0 ? 0x8CB4D5 : 0xCCCCCC,
+      metalness: 0.3,
+      roughness: 0.4,
+      transparent: true,
+      opacity: 0.7,
+      wireframe: i > 1,
+    });
+    const mesh = new THREE.Mesh(g, mat);
+    mesh.position.set(
+      (Math.random() - 0.5) * 8,
+      (Math.random() - 0.5) * 6,
+      (Math.random() - 0.5) * 4
+    );
+    mesh.userData = {
+      rotSpeed: { x: (Math.random() - 0.5) * 0.01, y: (Math.random() - 0.5) * 0.01 },
+      floatOffset: Math.random() * Math.PI * 2,
+      baseY: mesh.position.y,
+    };
+    scene.add(mesh);
+    shapes.push(mesh);
+  });
+
+  function animateEdu(time) {
+    requestAnimationFrame(animateEdu);
+    shapes.forEach(s => {
+      s.rotation.x += s.userData.rotSpeed.x;
+      s.rotation.y += s.userData.rotSpeed.y;
+      s.position.y = s.userData.baseY + Math.sin(time * 0.001 + s.userData.floatOffset) * 0.5;
+    });
+    renderer.render(scene, camera);
+  }
+  animateEdu(0);
+})();
+</script>
+
+<!-- COMMON JS -->
+<script src="js/common.js"></script>
+
+<!-- About parallax tilt -->
+<script>
+const aboutVisual = document.getElementById('aboutVisual');
+const aboutSection = document.getElementById('about-preview');
+if (aboutSection && aboutVisual) {
+  aboutSection.addEventListener('mousemove', e => {
+    const rect = aboutSection.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    aboutVisual.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 5}deg)`;
+  });
+  aboutSection.addEventListener('mouseleave', () => {
+    aboutVisual.style.transform = 'perspective(600px) rotateY(0) rotateX(0)';
+  });
+}
+</script>
+
+</body>
+</html>

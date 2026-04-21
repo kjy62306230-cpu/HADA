@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== ABOUT PAGE STYLES ===== */
+
+  /* STORY */
+  #story {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .story-visual {
+    height: 550px; background: var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; color: var(--blue-dark); opacity: 0.2;
+    letter-spacing: 10px; overflow: hidden;
+  }
+  .story-text p {
+    font-size: 0.92rem; color: var(--gray); font-weight: 300;
+    line-height: 2; margin-bottom: 20px;
+  }
+  .story-text p strong {
+    color: var(--black); font-weight: 500;
+  }
+
+  /* PHILOSOPHY */
+  #philosophy {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+    text-align: center;
+  }
+  #philosophy .section-desc { margin: 0 auto 60px; }
+  .philosophy-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; max-width: 1000px; margin: 0 auto;
+  }
+  .philosophy-item {
+    padding: 40px 30px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(140,180,213,0.12);
+    transition: all 0.4s;
+    border-radius: 12px;
+  }
+  .philosophy-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 50px rgba(140,180,213,0.15);
+    background: #fff;
+  }
+  .philosophy-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; color: var(--blue); font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .philosophy-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .philosophy-desc {
+    font-size: 0.82rem; color: var(--gray); line-height: 1.7; font-weight: 300;
+  }
+
+  /* STATS */
+  #stats {
+    text-align: center;
+  }
+  .stats-grid {
+    display: flex; justify-content: center; gap: 80px;
+    margin-top: 60px; flex-wrap: wrap;
+  }
+  .stats-item { text-align: center; }
+  .stats-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300; color: var(--blue-dark);
+    letter-spacing: 2px;
+  }
+  .stats-label {
+    font-size: 0.78rem; color: var(--gray); letter-spacing: 2px;
+    text-transform: uppercase; margin-top: 8px;
+  }
+  .stats-desc {
+    font-size: 0.75rem; color: var(--gray); font-weight: 300;
+    margin-top: 4px;
+  }
+
+  /* FOUNDER */
+  #founder {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    background: linear-gradient(180deg, var(--white), #F4F7FA);
+  }
+  .founder-photo {
+    height: 500px; background: var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; color: var(--blue-dark); opacity: 0.3;
+    letter-spacing: 6px;
+  }
+  .founder-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-style: italic;
+    color: var(--blue-dark); line-height: 1.6;
+    margin-bottom: 24px; letter-spacing: 1px;
+  }
+  .founder-name {
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .founder-role {
+    font-size: 0.78rem; color: var(--gray); letter-spacing: 1.5px;
+  }
+
+  @media (max-width: 900px) {
+    #story, #founder { grid-template-columns: 1fr; gap: 40px; }
+    .story-visual, .founder-photo { height: 300px; }
+    .philosophy-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .stats-grid { gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="waxing.html">Waxing</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="product.html">Products</a></li>
+  </ul>
+  <a href="index.html#cta" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">About Euna Hada</p>
+    <h1 class="page-hero-title">Our <em>Story</em></h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">아름다움을 향한 진심, 은아하다의 이야기</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-visual reveal">E · H</div>
+  <div class="story-text">
+    <p class="section-tag reveal">Brand Story</p>
+    <h2 class="section-title reveal">아름다움의 본질을<br>탐구하다</h2>
+    <p class="reveal">
+      은아하다는 <strong>박은아 대표</strong>가 8년 이상의 왁싱 전문 경험을 바탕으로
+      설립한 프리미엄 뷰티 브랜드입니다.
+    </p>
+    <p class="reveal">
+      단순한 시술을 넘어, 고객 한 분 한 분의 <strong>피부 타입과 고민</strong>에 맞는
+      맞춤형 서비스를 제공합니다. 프로가 사용하는 제품의 품질을
+      일반 고객에게도 전달하고자 <strong>ClearWax</strong>를 개발했습니다.
+    </p>
+    <p class="reveal">
+      또한 전국 100개 이상의 뷰티샵과 파트너십을 맺고,
+      <strong>반영구 문신 머신 Browxing</strong> 보급과 왁싱 창업 교육을 통해
+      뷰티 산업의 성장을 함께 이끌고 있습니다.
+    </p>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <p class="section-tag reveal">Philosophy</p>
+  <h2 class="section-title reveal">은아하다의 세 가지 약속</h2>
+  <p class="section-desc reveal">모든 서비스와 제품에 담긴 핵심 가치</p>
+  <div class="philosophy-grid">
+    <div class="philosophy-item reveal reveal-delay-1">
+      <div class="philosophy-num">01</div>
+      <h3 class="philosophy-title">Expertise</h3>
+      <p class="philosophy-desc">
+        8년 이상의 전문 경험과 끊임없는 연구로
+        최상의 시술 품질을 보장합니다.
+      </p>
+    </div>
+    <div class="philosophy-item reveal reveal-delay-2">
+      <div class="philosophy-num">02</div>
+      <h3 class="philosophy-title">Trust</h3>
+      <p class="philosophy-desc">
+        3,000명 이상의 고객과 100개 이상의
+        파트너사가 증명하는 신뢰의 브랜드.
+      </p>
+    </div>
+    <div class="philosophy-item reveal reveal-delay-3">
+      <div class="philosophy-num">03</div>
+      <h3 class="philosophy-title">Innovation</h3>
+      <p class="philosophy-desc">
+        ClearWax와 Browxing으로
+        뷰티 산업의 새로운 기준을 만듭니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <p class="section-tag reveal">Numbers</p>
+  <h2 class="section-title reveal">은아하다가 걸어온 길</h2>
+  <div class="stats-grid">
+    <div class="stats-item reveal reveal-delay-1">
+      <div class="stats-num">8+</div>
+      <div class="stats-label">Years</div>
+      <div class="stats-desc">전문 왁싱 경력</div>
+    </div>
+    <div class="stats-item reveal reveal-delay-2">
+      <div class="stats-num">3,000+</div>
+      <div class="stats-label">Clients</div>
+      <div class="stats-desc">만족한 고객</div>
+    </div>
+    <div class="stats-item reveal reveal-delay-3">
+      <div class="stats-num">100+</div>
+      <div class="stats-label">Partners</div>
+      <div class="stats-desc">전국 파트너 뷰티샵</div>
+    </div>
+    <div class="stats-item reveal reveal-delay-4">
+      <div class="stats-num">No.1</div>
+      <div class="stats-label">Quality</div>
+      <div class="stats-desc">프리미엄 왁싱 품질</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="founder-photo reveal">Photo</div>
+  <div>
+    <p class="section-tag reveal">Founder</p>
+    <p class="founder-quote reveal">
+      "모든 사람이 자신의 아름다움을<br>
+      발견할 수 있도록 돕는 것,<br>
+      그것이 은아하다의 시작이자 목표입니다."
+    </p>
+    <p class="founder-name reveal">박은아</p>
+    <p class="founder-role reveal">은아하다 대표 · 왁싱 전문가</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Get in Touch</p>
+    <h2 class="cta-title reveal">상담 및 예약</h2>
+    <p class="cta-desc reveal">은아하다와 함께 아름다움을 시작하세요</p>
+    <a href="tel:010-9944-7901" class="cta-btn reveal">예약 문의</a>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script src="js/common.js"></script>
+</body>
+</html>
