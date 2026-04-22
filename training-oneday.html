@@ -12,7 +12,10 @@
      covers the fixed nav, hero is a complete standalone block. */
   .page-hero {
     height: auto; min-height: 400px; padding: 60px 60px 40px;
+    isolation: isolate;        /* new stacking context contains canvas */
+    z-index: 1;                /* below nav (z-index: 1000) */
   }
+  .page-hero canvas { z-index: 0; }
   @media (max-width: 900px) {
     .page-hero {
       min-height: 320px;
