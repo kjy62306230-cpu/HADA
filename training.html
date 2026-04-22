@@ -8,15 +8,19 @@
 <style>
   /* ===== TRAINING PAGE STYLES ===== */
 
-  /* Hero compact — shrink so main cards are near the fold.
-     Override section's default 120px/120px padding so content doesn't overflow
-     inside the shorter box (box-sizing: border-box). */
+  /* Hero — top padding ensures fixed nav (~84px) never overlaps content.
+     display: flex; align-items: center is inherited from style.css. */
   .page-hero {
-    height: auto; min-height: 260px;
-    padding: 90px 60px 40px;
+    height: 50vh;
+    min-height: 420px;
+    padding: 80px 60px 0;
   }
   @media (max-width: 900px) {
-    .page-hero { min-height: 220px; padding: 80px 24px 30px; }
+    .page-hero {
+      height: auto;
+      min-height: 320px;
+      padding: 100px 24px 40px;
+    }
   }
 
   /* Shared card base — reuses Philosophy tone from about.html */
