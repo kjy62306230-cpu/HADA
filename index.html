@@ -184,6 +184,36 @@
     letter-spacing: 1px;
   }
 
+  /* CARD SLIDESHOW — fade-cycle placeholder images */
+  .product-img.slideshow {
+    position: relative; overflow: hidden; padding: 0;
+  }
+  .product-img.slideshow .slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; letter-spacing: 3px;
+    color: var(--blue-dark);
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.35);
+    opacity: 0;
+    animation: slideFade 12s infinite;
+  }
+  .product-img.slideshow .slide:nth-child(1) { animation-delay: 0s; }
+  .product-img.slideshow .slide:nth-child(2) { animation-delay: 4s; }
+  .product-img.slideshow .slide:nth-child(3) { animation-delay: 8s; }
+  @keyframes slideFade {
+    0%, 2%   { opacity: 0; }
+    5%, 30%  { opacity: 1; }
+    33%, 100% { opacity: 0; }
+  }
+  a.product-card {
+    text-decoration: none; color: inherit;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  a.product-card:hover { transform: none !important; box-shadow: none !important; }
+
   /* EDUCATION PREVIEW */
   #education-preview {
     background: linear-gradient(180deg, #F4F7FA, var(--white));
@@ -208,12 +238,123 @@
   }
   #edu-canvas { width: 100%; height: 100%; }
 
+  /* ===== NAV DROPDOWN ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+
+  /* Manager button — outline style, slightly smaller than nav-cta */
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* BUSINESS SERVICES — 5가지 사업 */
+  #business-services {
+    background: linear-gradient(180deg, var(--white) 0%, #F4F7FA 100%);
+    text-align: center;
+  }
+  #business-services .section-desc { margin: 0 auto 60px; }
+  .business-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 30px; max-width: 1100px; margin: 0 auto;
+  }
+  .business-grid > .service-card { grid-column: span 2; }
+  /* 마지막 행(4·5번)을 가운데 정렬 */
+  .business-grid > .service-card:nth-child(4) { grid-column: 2 / span 2; }
+  .business-grid > .service-card:nth-child(5) { grid-column: 4 / span 2; }
+
+  a.service-card {
+    text-decoration: none; color: inherit;
+    display: block;
+  }
+  .biz-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; line-height: 1;
+    color: var(--blue); letter-spacing: 3px;
+    margin-bottom: 22px;
+    transition: color 0.4s ease;
+  }
+  .service-card:hover .biz-num { color: var(--blue-dark); }
+  .biz-kicker {
+    font-size: 0.7rem; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--blue-dark);
+    margin-bottom: 8px; font-weight: 500;
+  }
+
   /* RESPONSIVE HOME */
   @media (max-width: 900px) {
     #about-preview, #education-preview { grid-template-columns: 1fr; gap: 40px; }
     .service-grid { grid-template-columns: 1fr; max-width: 400px; }
     .about-visual { height: 300px; }
     .product-showcase { gap: 30px; }
+    .business-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .business-grid > .service-card,
+    .business-grid > .service-card:nth-child(4),
+    .business-grid > .service-card:nth-child(5) { grid-column: auto; }
   }
 </style>
 </head>
@@ -227,11 +368,25 @@
   <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="waxing.html">Waxing</a></li>
-    <li><a href="education.html">Education</a></li>
-    <li><a href="product.html">Products</a></li>
+    <li class="has-dropdown">
+      <a href="#" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="#" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
   </ul>
-  <a href="#cta" class="nav-cta">Contact</a>
+  <a href="manager.html" class="nav-manager">Manager</a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -277,69 +432,50 @@
   </div>
 </section>
 
-<!-- ===== SERVICES PREVIEW ===== -->
-<section id="services-preview">
-  <p class="section-tag reveal">Services</p>
-  <h2 class="section-title reveal">Our Expertise</h2>
-  <p class="section-desc reveal">전문성과 정성을 담은 프리미엄 왁싱 서비스</p>
-  <div class="service-grid">
-    <div class="service-card reveal reveal-delay-1" data-tilt>
-      <div class="service-icon">✦</div>
-      <h3 class="service-name">Face Waxing</h3>
-      <p class="service-desc">
-        섬세한 터치로 완성하는 페이스 왁싱.
-        눈썹, 인중, 이마 라인까지 꼼꼼하게.
-      </p>
-    </div>
-    <div class="service-card reveal reveal-delay-2" data-tilt>
-      <div class="service-icon">✦</div>
-      <h3 class="service-name">Body Waxing</h3>
-      <p class="service-desc">
-        팔, 다리, 겨드랑이 등 바디 전체.
-        부드럽고 깨끗한 피부를 경험하세요.
-      </p>
-    </div>
-    <div class="service-card reveal reveal-delay-3" data-tilt>
-      <div class="service-icon">✦</div>
-      <h3 class="service-name">Brazilian</h3>
-      <p class="service-desc">
-        프라이빗한 공간에서 편안하게.
-        숙련된 전문가의 안전한 시술.
-      </p>
-    </div>
-  </div>
-  <a href="waxing.html" class="link-btn reveal">전체 서비스 보기 →</a>
-</section>
-
-<!-- ===== PRODUCTS PREVIEW ===== -->
+<!-- ===== OUR TRAINING (was PRODUCTS PREVIEW) ===== -->
 <section id="products-preview">
-  <p class="section-tag reveal">Products</p>
-  <h2 class="section-title reveal">ClearWax Collection</h2>
-  <p class="section-desc reveal">프로가 만든 셀프 왁싱 제품, 집에서도 살롱 퀄리티를</p>
+  <p class="section-tag reveal">Our Training</p>
+  <h2 class="section-title reveal">현장에서 <em>함께 배우는</em> 은아하다</h2>
+  <p class="section-desc reveal">세미나, 교육, 파트너샵까지 — 전국 원장님들과 함께 성장합니다</p>
   <div class="product-showcase">
-    <div class="product-card reveal reveal-delay-1">
+    <a href="training-browxing.html" class="product-card reveal reveal-delay-1">
       <div class="product-card-inner" data-product-tilt>
-        <div class="product-img">CW</div>
+        <div class="product-img slideshow">
+          <!-- TODO: 실제 세미나 사진으로 교체 -->
+          <div class="slide">세미나 사진 #1</div>
+          <div class="slide">세미나 사진 #2</div>
+          <div class="slide">세미나 사진 #3</div>
+        </div>
       </div>
-      <p class="product-name">ClearWax Original</p>
-      <p class="product-price">카카오톡 문의</p>
-    </div>
-    <div class="product-card reveal reveal-delay-2">
+      <p class="product-name">세미나 현장</p>
+      <p class="product-price">실제 수강 현장</p>
+    </a>
+    <a href="training.html" class="product-card reveal reveal-delay-2">
       <div class="product-card-inner" data-product-tilt>
-        <div class="product-img">CW+</div>
+        <div class="product-img slideshow">
+          <!-- TODO: 실제 교육 사진으로 교체 -->
+          <div class="slide">교육 사진 #1</div>
+          <div class="slide">교육 사진 #2</div>
+          <div class="slide">교육 사진 #3</div>
+        </div>
       </div>
-      <p class="product-name">ClearWax Sensitive</p>
-      <p class="product-price">카카오톡 문의</p>
-    </div>
-    <div class="product-card reveal reveal-delay-3">
+      <p class="product-name">교육 과정</p>
+      <p class="product-price">Training Programs</p>
+    </a>
+    <a href="partnership.html" class="product-card reveal reveal-delay-3">
       <div class="product-card-inner" data-product-tilt>
-        <div class="product-img">Kit</div>
+        <div class="product-img slideshow">
+          <!-- TODO: 실제 파트너샵 사진으로 교체 -->
+          <div class="slide">파트너샵 #1</div>
+          <div class="slide">파트너샵 #2</div>
+          <div class="slide">파트너샵 #3</div>
+        </div>
       </div>
-      <p class="product-name">Home Waxing Kit</p>
-      <p class="product-price">카카오톡 문의</p>
-    </div>
+      <p class="product-name">파트너샵</p>
+      <p class="product-price">전국 100+</p>
+    </a>
   </div>
-  <a href="product.html" class="link-btn reveal">제품 더보기 →</a>
+  <a href="training.html" class="link-btn reveal">교육 과정 더보기 →</a>
 </section>
 
 <!-- ===== EDUCATION PREVIEW ===== -->
@@ -361,6 +497,45 @@
   </div>
   <div class="edu-visual">
     <canvas id="edu-canvas"></canvas>
+  </div>
+</section>
+
+<!-- ===== OUR SERVICES — 은아하다의 5가지 사업 ===== -->
+<section id="business-services">
+  <p class="section-tag reveal">Our Services</p>
+  <h2 class="section-title reveal">은아하다의 <em>5가지</em> 사업</h2>
+  <p class="section-desc reveal">원장님의 샵 성장을 위한 모든 것</p>
+  <div class="business-grid">
+    <a href="training-browxing.html" class="service-card reveal reveal-delay-1" data-tilt>
+      <div class="biz-num">01</div>
+      <p class="biz-kicker">Browxing</p>
+      <h3 class="service-name">브로우싱 도입 및 교육</h3>
+      <p class="service-desc">반영구 눈썹 시술의 새로운 기준</p>
+    </a>
+    <a href="partnership.html" class="service-card reveal reveal-delay-2" data-tilt>
+      <div class="biz-num">02</div>
+      <p class="biz-kicker">Clear Wax</p>
+      <h3 class="service-name">클리어 왁스 지사 모집</h3>
+      <p class="service-desc">월 200kg 판매 중인 자체 개발 왁스</p>
+    </a>
+    <a href="training-startup.html" class="service-card reveal reveal-delay-3" data-tilt>
+      <div class="biz-num">03</div>
+      <p class="biz-kicker">Startup</p>
+      <h3 class="service-name">왁싱샵 창업 컨설팅</h3>
+      <p class="service-desc">현장 경험으로 검증된 창업 A to Z</p>
+    </a>
+    <a href="training-oneday.html" class="service-card reveal reveal-delay-1" data-tilt>
+      <div class="biz-num">04</div>
+      <p class="biz-kicker">One-day</p>
+      <h3 class="service-name">왁싱 One-day 교육</h3>
+      <p class="service-desc">페이스·바디·브라질리언 원데이</p>
+    </a>
+    <a href="training-oneday.html#online" class="service-card reveal reveal-delay-2" data-tilt>
+      <div class="biz-num">05</div>
+      <p class="biz-kicker">Online</p>
+      <h3 class="service-name">온라인 왁싱 교육</h3>
+      <p class="service-desc">시간·장소 구애 없는 온라인 강의</p>
+    </a>
   </div>
 </section>
 
