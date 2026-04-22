@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnership — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== PARTNERSHIP PAGE STYLES ===== */
+
+  /* Hero — hub-level page (no breadcrumb) */
+  .page-hero {
+    height: 50vh; min-height: 420px;
+    padding: 80px 60px 0;
+  }
+  @media (max-width: 900px) {
+    .page-hero { height: auto; min-height: 320px; padding: 100px 24px 40px; }
+  }
+
+  /* Shared tilt-card base — same tone as products.html .pcard */
+  .pcard {
+    padding: 36px 30px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(140,180,213,0.12);
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                background 0.4s ease;
+  }
+  .pcard:hover {
+    transform: translateY(-6px);
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(140,180,213,0.22),
+                0 0 0 1px rgba(140,180,213,0.3);
+  }
+
+  /* ===== PARTNER TYPES — 2 large side-by-side cards ===== */
+  #partner-types {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+  }
+  .types-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; max-width: 1100px; margin: 0 auto;
+  }
+  .type-card { padding: 48px 40px; text-align: left; }
+  .type-tag {
+    font-size: 0.74rem; letter-spacing: 3px;
+    color: var(--blue); text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .type-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .type-title em { font-style: italic; color: var(--blue); }
+  .type-desc {
+    font-size: 0.9rem; color: var(--gray);
+    line-height: 1.75; font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .type-features { list-style: none; margin-bottom: 32px; }
+  .type-features li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(140,180,213,0.15);
+    font-size: 0.88rem; line-height: 1.6;
+  }
+  .type-features li:last-child { border-bottom: 0; }
+  .type-features .check {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    background: rgba(140,180,213,0.2);
+    color: var(--blue-dark);
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 600;
+    margin-top: 2px;
+  }
+  .type-cta {
+    display: inline-block;
+    padding: 13px 28px;
+    background: var(--blue); color: #fff;
+    text-decoration: none;
+    font-size: 0.76rem; letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .type-cta:hover {
+    background: var(--blue-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(140,180,213,0.35);
+  }
+
+  /* ===== PARTNERS MAP — regions grid ===== */
+  #partners-map {
+    background: linear-gradient(180deg, #F5F9FC 0%, #FFFFFF 100%);
+    text-align: center;
+  }
+  #partners-map .section-desc { margin: 0 auto 60px; }
+  .regions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    text-align: left;
+  }
+  .region-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(140, 180, 213, 0.15);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+    perspective: 800px;
+    position: relative;
+    overflow: hidden;
+  }
+  .region-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .region-card:hover::before { opacity: 1; }
+  .region-card:hover {
+    background: #fff;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(140, 180, 213, 0.15);
+  }
+  .region-header {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(140, 180, 213, 0.15);
+  }
+  .region-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .region-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .region-count {
+    font-size: 0.78rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+  .region-partners {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .region-partners li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(140, 180, 213, 0.08);
+    transition: all 0.3s;
+  }
+  .region-partners li:last-child {
+    border-bottom: none;
+  }
+  .region-partners li:hover {
+    padding-left: 8px;
+  }
+  .region-partners li::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: var(--blue);
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .partner-name {
+    font-size: 0.88rem;
+    color: var(--black);
+    flex: 1;
+  }
+  .partner-owner {
+    font-size: 0.78rem;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+  }
+
+  .map-stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 70px;
+    padding-top: 50px;
+    border-top: 1px solid rgba(140, 180, 213, 0.15);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--blue);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--gray);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .regions-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .map-stats {
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-size: 2.4rem;
+    }
+  }
+
+  /* ===== BENEFITS — 2x2 grid ===== */
+  #benefits { text-align: center; }
+  #benefits .section-desc { margin: 0 auto 60px; }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .benefit-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--blue);
+    font-weight: 300; margin-bottom: 14px;
+  }
+  .benefit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .benefit-desc {
+    font-size: 0.86rem; color: var(--gray);
+    line-height: 1.75; font-weight: 300;
+  }
+
+  /* ===== CASES — 3 cards ===== */
+  #cases {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #cases .section-desc { margin: 0 auto 60px; }
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .case-shop {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+  .case-meta {
+    font-size: 0.76rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .case-body {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--black);
+    min-height: 80px;
+  }
+
+  /* ===== PROCESS — 4 step cards ===== */
+  #process { text-align: center; }
+  #process .section-desc { margin: 0 auto 60px; }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .process-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; color: var(--blue);
+    font-weight: 300;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+  }
+  .process-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .process-desc {
+    font-size: 0.84rem;
+    color: var(--gray);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  @media (max-width: 900px) {
+    .types-grid,
+    .benefits-grid,
+    .cases-grid,
+    .process-grid {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+    }
+    .process-grid { max-width: 420px; }
+  }
+
+  /* ===== FAQ PREVIEW ===== */
+  #faq-preview {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #faq-preview .section-desc { margin: 0 auto 50px; }
+  .faq-list {
+    max-width: 780px; margin: 0 auto 44px;
+    text-align: left;
+  }
+  .faq-item {
+    padding: 26px 28px;
+    border: 1px solid rgba(140,180,213,0.15);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.7);
+    transition: all 0.3s ease;
+  }
+  .faq-item:hover {
+    border-color: rgba(140,180,213,0.35);
+    background: #fff;
+    transform: translateX(4px);
+  }
+  .faq-q {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 0.95rem; font-weight: 400;
+    color: var(--black);
+  }
+  .faq-q-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--blue);
+    font-weight: 300; flex-shrink: 0;
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+  .dropdown-menu a.active { color: var(--blue); }
+
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* Outline CTA variant */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px; margin-left: 12px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  @media (max-width: 600px) {
+    .cta-btn-outline { margin-left: 0; margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html" class="active">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
+  </ul>
+  <a href="manager.html" class="nav-manager">Manager</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Partnership</p>
+    <h1 class="page-hero-title">함께 <em>성장</em>하는 파트너</h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">은아하다와 함께 시장을 만들어가세요</p>
+  </div>
+</section>
+
+<!-- PARTNER TYPES -->
+<section id="partner-types">
+  <p class="section-tag reveal" style="text-align:center;">Two Models</p>
+  <h2 class="section-title reveal" style="text-align:center;">은아하다의 <em>두 가지 파트너십</em></h2>
+  <p class="section-desc reveal" style="text-align:center; margin: 0 auto 60px;">원장님의 방향에 맞는 모델을 선택하세요</p>
+
+  <div class="types-grid">
+    <div class="pcard type-card reveal reveal-delay-1" data-tilt>
+      <p class="type-tag">Type 01</p>
+      <h3 class="type-title">Browxing <em>세미나 파트너</em></h3>
+      <p class="type-desc">브로우싱 머신을 자체 세미나로 소개하고 보급합니다.</p>
+      <ul class="type-features">
+        <li><span class="check">✓</span><span>전국 단독 지역 보장</span></li>
+        <li><span class="check">✓</span><span>머신 판매 수익 분배</span></li>
+        <li><span class="check">✓</span><span>세미나 운영 교육 지원</span></li>
+        <li><span class="check">✓</span><span>홍보물 · 자료 전체 제공</span></li>
+      </ul>
+      <a href="#contact" class="type-cta">세미나 파트너 문의 →</a>
+    </div>
+    <div class="pcard type-card reveal reveal-delay-2" data-tilt>
+      <p class="type-tag">Type 02</p>
+      <h3 class="type-title">Clear Wax <em>지사</em></h3>
+      <p class="type-desc">Clear Wax 도매 유통 + 지역 판권을 운영합니다.</p>
+      <ul class="type-features">
+        <li><span class="check">✓</span><span>최저가 도매 공급</span></li>
+        <li><span class="check">✓</span><span>지역 판권 보호</span></li>
+        <li><span class="check">✓</span><span>마케팅 자료 지원</span></li>
+        <li><span class="check">✓</span><span>정기 입고 시스템</span></li>
+      </ul>
+      <a href="#contact" class="type-cta">지사 문의 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS MAP -->
+<section id="partners-map">
+  <p class="section-tag reveal">Network</p>
+  <h2 class="section-title reveal">전국 <em>파트너 네트워크</em></h2>
+  <p class="section-desc reveal">은아하다가 함께한 원장님들이 전국에 있습니다</p>
+
+  <div class="regions-grid">
+    <!-- 수도권 -->
+    <div class="region-card reveal" data-tilt>
+      <div class="region-header">
+        <span class="region-label">Seoul · Gyeonggi</span>
+        <h3 class="region-name">수도권</h3>
+        <span class="region-count">3 Partners</span>
+      </div>
+      <ul class="region-partners">
+        <li>
+          <span class="partner-name">강남 OO뷰티</span>
+          <span class="partner-owner">김O희 원장</span>
+        </li>
+        <li>
+          <span class="partner-name">분당 OO살롱</span>
+          <span class="partner-owner">박O진 원장</span>
+        </li>
+        <li>
+          <span class="partner-name">인천 OO왁싱</span>
+          <span class="partner-owner">이O정 원장</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 강원 -->
+    <div class="region-card reveal" data-tilt>
+      <div class="region-header">
+        <span class="region-label">Gangwon</span>
+        <h3 class="region-name">강원</h3>
+        <span class="region-count">1 Partner</span>
+      </div>
+      <ul class="region-partners">
+        <li>
+          <span class="partner-name">춘천 OO뷰티</span>
+          <span class="partner-owner">최O수 원장</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 충청 -->
+    <div class="region-card reveal" data-tilt>
+      <div class="region-header">
+        <span class="region-label">Chungcheong</span>
+        <h3 class="region-name">충청</h3>
+        <span class="region-count">1 Partner</span>
+      </div>
+      <ul class="region-partners">
+        <li>
+          <span class="partner-name">대전 OO살롱</span>
+          <span class="partner-owner">정O아 원장</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 전라 -->
+    <div class="region-card reveal" data-tilt>
+      <div class="region-header">
+        <span class="region-label">Jeolla</span>
+        <h3 class="region-name">전라</h3>
+        <span class="region-count">1 Partner</span>
+      </div>
+      <ul class="region-partners">
+        <li>
+          <span class="partner-name">광주 OO뷰티</span>
+          <span class="partner-owner">한O미 원장</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 경상 -->
+    <div class="region-card reveal" data-tilt>
+      <div class="region-header">
+        <span class="region-label">Gyeongsang</span>
+        <h3 class="region-name">경상</h3>
+        <span class="region-count">2 Partners</span>
+      </div>
+      <ul class="region-partners">
+        <li>
+          <span class="partner-name">대구 OO왁싱</span>
+          <span class="partner-owner">윤O진 원장</span>
+        </li>
+        <li>
+          <span class="partner-name">해운대 OO뷰티</span>
+          <span class="partner-owner">이O영 원장</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 제주 -->
+    <div class="region-card reveal" data-tilt>
+      <div class="region-header">
+        <span class="region-label">Jeju</span>
+        <h3 class="region-name">제주</h3>
+        <span class="region-count">1 Partner</span>
+      </div>
+      <ul class="region-partners">
+        <li>
+          <span class="partner-name">제주 OO살롱</span>
+          <span class="partner-owner">강O은 원장</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="map-stats">
+    <div class="stat-item">
+      <span class="stat-num">100+</span>
+      <span class="stat-label">Partner Shops</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">17</span>
+      <span class="stat-label">Cities</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">9</span>
+      <span class="stat-label">Seminars</span>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <p class="section-tag reveal">Benefits</p>
+  <h2 class="section-title reveal">은아하다 <em>파트너의 혜택</em></h2>
+  <p class="section-desc reveal">파트너에게만 제공되는 가치</p>
+
+  <div class="benefits-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <div class="benefit-num">01</div>
+      <h3 class="benefit-title">검증된 시장</h3>
+      <p class="benefit-desc">100곳 이상의 샵 실적으로 검증된 비즈니스 모델. 불확실성 없이 안정적인 출발이 가능합니다.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <div class="benefit-num">02</div>
+      <h3 class="benefit-title">전속 교육</h3>
+      <p class="benefit-desc">파트너 전용 심화 교육 과정. 세미나 운영, 제품 지식, 고객 관리까지 깊이 있게.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-3" data-tilt>
+      <div class="benefit-num">03</div>
+      <h3 class="benefit-title">마케팅 지원</h3>
+      <p class="benefit-desc">브랜드 자산 전체 활용 가능. 홍보물 · 영상 · 카피 · 디자인 자료 공유.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-4" data-tilt>
+      <div class="benefit-num">04</div>
+      <h3 class="benefit-title">지속 성장</h3>
+      <p class="benefit-desc">은아하다 브랜드 확장 시 기존 파트너에게 혜택 우선 제공. 함께 커가는 구조.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases">
+  <p class="section-tag reveal">Success Stories</p>
+  <h2 class="section-title reveal">먼저 시작한 <em>파트너들</em></h2>
+  <p class="section-desc reveal">은아하다와 함께 성장한 파트너 사례</p>
+
+  <div class="cases-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <h3 class="case-shop">OO뷰티</h3>
+      <p class="case-meta">서울 · 세미나 파트너</p>
+      <p class="case-body">"월 5건의 신규 도입을 만들어내면서 매장 수익이 3배로 뛰었습니다. 세미나를 직접 운영하니 고객 신뢰도도 함께 올라갔어요."</p>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <h3 class="case-shop">OO왁싱샵</h3>
+      <p class="case-meta">부산 · 지사</p>
+      <p class="case-body">"부산 지역 시장의 80%를 점유하고 있습니다. 지역 독점과 정기 입고 덕에 안정적 유통이 가능해졌어요."</p>
+    </div>
+    <div class="pcard reveal reveal-delay-3" data-tilt>
+      <h3 class="case-shop">OO살롱</h3>
+      <p class="case-meta">대구 · 세미나 + 지사</p>
+      <p class="case-body">"두 모델을 함께 운영해 시너지가 확실합니다. 왁스 유통이 세미나 리드로 이어지고, 세미나가 왁스 재구매로 이어지고."</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <p class="section-tag reveal">Process</p>
+  <h2 class="section-title reveal">파트너가 되는 <em>4단계</em></h2>
+  <p class="section-desc reveal">문의부터 시작까지 평균 2주 이내</p>
+
+  <div class="process-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <div class="process-num">01</div>
+      <h3 class="process-title">문의 접수</h3>
+      <p class="process-desc">카카오톡 또는 전화로 가볍게 문의.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <div class="process-num">02</div>
+      <h3 class="process-title">1:1 상담</h3>
+      <p class="process-desc">사업 방향과 지역을 직접 협의.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-3" data-tilt>
+      <div class="process-num">03</div>
+      <h3 class="process-title">계약 체결</h3>
+      <p class="process-desc">파트너십 조건을 문서로 확정.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-4" data-tilt>
+      <div class="process-num">04</div>
+      <h3 class="process-title">시작</h3>
+      <p class="process-desc">교육 · 자료 · 지원 전면 개시.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PREVIEW -->
+<section id="faq-preview">
+  <p class="section-tag reveal">FAQ</p>
+  <h2 class="section-title reveal">파트너십 <em>자주 묻는 질문</em></h2>
+  <p class="section-desc reveal">가장 많이 문의 주시는 내용을 모았습니다</p>
+
+  <div class="faq-list">
+    <div class="faq-item reveal reveal-delay-1">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>파트너 가입 비용이 있나요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>지역 중복은 어떻게 관리하나요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-3">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>파트너 해지 조건이 있나요?</div>
+    </div>
+  </div>
+
+  <a href="qna.html#partnership" class="link-btn reveal">전체 Q&amp;A 보기 →</a>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Contact</p>
+    <h2 class="cta-title reveal">파트너십 <em>문의</em></h2>
+    <p class="cta-desc reveal">1:1 맞춤 상담 · 계약 조건 안내</p>
+    <div class="reveal">
+      <a href="tel:010-9944-7901" class="cta-btn">전화 문의</a>
+      <a href="#" class="cta-btn-outline">카카오톡 문의</a>
+    </div>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>
