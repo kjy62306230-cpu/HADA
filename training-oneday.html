@@ -8,21 +8,22 @@
 <style>
   /* ===== ONE-DAY TRAINING PAGE STYLES ===== */
 
-  /* Hero compact — breadcrumb above already clears the fixed nav,
-     so only small top padding needed. Override section's default 120/120 padding
-     so content doesn't overflow inside the shorter box (box-sizing: border-box). */
+  /* Hero — ample self-space for title rendering; breadcrumb above
+     covers the fixed nav, hero is a complete standalone block. */
   .page-hero {
-    height: auto; min-height: 200px;
-    padding: 40px 60px 40px;
+    height: auto; min-height: 400px; padding: 60px 60px 40px;
   }
   @media (max-width: 900px) {
-    .page-hero { min-height: 180px; padding: 30px 24px 28px; }
+    .page-hero {
+      min-height: 320px;
+      padding: 40px 24px 40px;
+    }
   }
 
   /* Breadcrumb */
   .breadcrumb {
     max-width: 1200px; margin: 0 auto;
-    padding: 110px 60px 0;
+    padding: 120px 60px 20px 60px;
     font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase;
     color: var(--gray);
   }
@@ -32,7 +33,7 @@
   .breadcrumb-sep { margin: 0 12px; color: var(--blue); opacity: 0.6; }
   .breadcrumb-current { color: var(--black); }
   @media (max-width: 900px) {
-    .breadcrumb { padding: 90px 24px 0; font-size: 0.66rem; letter-spacing: 2px; }
+    .breadcrumb { padding: 90px 24px 16px 24px; font-size: 0.66rem; letter-spacing: 2px; }
   }
 
   /* Shared card base — reused Philosophy tone */
