@@ -8,6 +8,17 @@
 <style>
   /* ===== TRAINING PAGE STYLES ===== */
 
+  /* Hero compact — shrink so main cards are near the fold.
+     Override section's default 120px/120px padding so content doesn't overflow
+     inside the shorter box (box-sizing: border-box). */
+  .page-hero {
+    height: auto; min-height: 260px;
+    padding: 90px 60px 40px;
+  }
+  @media (max-width: 900px) {
+    .page-hero { min-height: 220px; padding: 80px 24px 30px; }
+  }
+
   /* Shared card base — reuses Philosophy tone from about.html */
   .tcard {
     padding: 36px 28px;
@@ -304,44 +315,7 @@
     <p class="page-hero-tag">Training &amp; Education</p>
     <h1 class="page-hero-title">전국 원장님들과 <em>함께</em> 성장합니다</h1>
     <div class="page-hero-line"></div>
-    <p class="page-hero-desc">은아하다의 교육과 세미나, 그리고 파트너 네트워크</p>
-  </div>
-</section>
-
-<!-- MAP / NETWORK -->
-<section id="map-section">
-  <p class="section-tag reveal">Our Network</p>
-  <h2 class="section-title reveal">전국의 <em>은아하다 파트너샵</em></h2>
-  <p class="section-desc reveal">100곳 이상의 원장님들이 은아하다와 함께하고 있습니다</p>
-
-  <!-- TODO: 실제 네이버 지도 API 연동 예정 -->
-  <div class="map-placeholder reveal">KOREA MAP</div>
-
-  <div class="region-grid">
-    <div class="tcard region-card reveal reveal-delay-1" data-tilt>
-      <h3 class="region-name">서울</h3>
-      <p class="region-shops">강남 · 홍대 외 24곳</p>
-    </div>
-    <div class="tcard region-card reveal reveal-delay-2" data-tilt>
-      <h3 class="region-name">경기</h3>
-      <p class="region-shops">분당 · 일산 외 21곳</p>
-    </div>
-    <div class="tcard region-card reveal reveal-delay-3" data-tilt>
-      <h3 class="region-name">부산 · 경남</h3>
-      <p class="region-shops">해운대 · 창원 외 18곳</p>
-    </div>
-    <div class="tcard region-card reveal reveal-delay-1" data-tilt>
-      <h3 class="region-name">대구 · 경북</h3>
-      <p class="region-shops">수성 · 포항 외 14곳</p>
-    </div>
-    <div class="tcard region-card reveal reveal-delay-2" data-tilt>
-      <h3 class="region-name">인천</h3>
-      <p class="region-shops">송도 · 부평 외 12곳</p>
-    </div>
-    <div class="tcard region-card reveal reveal-delay-3" data-tilt>
-      <h3 class="region-name">대전 · 충청</h3>
-      <p class="region-shops">둔산 · 천안 외 11곳</p>
-    </div>
+    <p class="page-hero-desc">브로우싱 도입부터 왁싱 창업까지</p>
   </div>
 </section>
 
@@ -382,6 +356,43 @@
       </p>
       <span class="program-more">자세히 보기 →</span>
     </a>
+  </div>
+</section>
+
+<!-- MAP / NETWORK -->
+<section id="map-section">
+  <p class="section-tag reveal">Our Network</p>
+  <h2 class="section-title reveal">전국의 <em>은아하다 파트너샵</em></h2>
+  <p class="section-desc reveal">100곳 이상의 원장님들이 은아하다와 함께하고 있습니다</p>
+
+  <!-- TODO: 실제 네이버 지도 API 연동 예정 -->
+  <div class="map-placeholder reveal">KOREA MAP</div>
+
+  <div class="region-grid">
+    <div class="tcard region-card reveal reveal-delay-1" data-tilt>
+      <h3 class="region-name">서울</h3>
+      <p class="region-shops">강남 · 홍대 외 24곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-2" data-tilt>
+      <h3 class="region-name">경기</h3>
+      <p class="region-shops">분당 · 일산 외 21곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-3" data-tilt>
+      <h3 class="region-name">부산 · 경남</h3>
+      <p class="region-shops">해운대 · 창원 외 18곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-1" data-tilt>
+      <h3 class="region-name">대구 · 경북</h3>
+      <p class="region-shops">수성 · 포항 외 14곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-2" data-tilt>
+      <h3 class="region-name">인천</h3>
+      <p class="region-shops">송도 · 부평 외 12곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-3" data-tilt>
+      <h3 class="region-name">대전 · 충청</h3>
+      <p class="region-shops">둔산 · 천안 외 11곳</p>
+    </div>
   </div>
 </section>
 

@@ -3,23 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — 은아하다</title>
+<title>Browxing Machine — 은아하다</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* ===== PRODUCTS HUB STYLES ===== */
+  /* ===== PRODUCT BROWXING PAGE STYLES ===== */
 
-  /* Hero compact — shrink so product cards are near the fold.
-     Override section's default 120px/120px padding so content doesn't overflow
-     inside the shorter box (box-sizing: border-box). */
+  /* Hero compact — breadcrumb above already clears the fixed nav,
+     so only small top padding needed. Override section's default 120/120 padding
+     so content doesn't overflow inside the shorter box (box-sizing: border-box). */
   .page-hero {
-    height: auto; min-height: 260px;
-    padding: 90px 60px 40px;
+    height: auto; min-height: 200px;
+    padding: 40px 60px 40px;
   }
   @media (max-width: 900px) {
-    .page-hero { min-height: 220px; padding: 80px 24px 30px; }
+    .page-hero { min-height: 180px; padding: 30px 24px 28px; }
   }
 
-  /* Shared card base — same tone as training.html */
+  /* Breadcrumb */
+  .breadcrumb {
+    max-width: 1200px; margin: 0 auto;
+    padding: 110px 60px 0;
+    font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gray);
+  }
+  .breadcrumb a { color: var(--gray); text-decoration: none; transition: color 0.25s ease; }
+  .breadcrumb a:hover { color: var(--blue-dark); }
+  .breadcrumb a::after { display: none; }
+  .breadcrumb-sep { margin: 0 12px; color: var(--blue); opacity: 0.6; }
+  .breadcrumb-current { color: var(--black); }
+  @media (max-width: 900px) {
+    .breadcrumb { padding: 90px 24px 0; font-size: 0.66rem; letter-spacing: 2px; }
+  }
+
+  /* Shared card base — same tone as products.html .pcard */
   .pcard {
     padding: 36px 28px;
     background: rgba(255,255,255,0.72);
@@ -38,57 +54,111 @@
                 0 0 0 1px rgba(140,180,213,0.3);
   }
 
-  /* PRODUCTS SHOWCASE — 2 large side-by-side cards */
-  #products-showcase {
+  /* PRODUCT MAIN — 2-col image + features */
+  #product-main {
     background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
-    text-align: center;
   }
-  #products-showcase .section-desc { margin: 0 auto 60px; }
-  .showcase-grid {
+  .pmain-grid {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 50px; max-width: 1100px; margin: 0 auto;
+    gap: 60px; align-items: center;
+    max-width: 1200px; margin: 0 auto;
   }
-  a.showcase-card {
-    text-decoration: none; color: inherit; display: block;
-    padding: 44px 40px; text-align: left;
-  }
-  .showcase-img {
-    /* TODO: 실제 제품 대표 이미지로 교체 */
-    height: 320px;
+  .pmain-img {
+    /* TODO: 실제 Browxing Machine 제품 사진으로 교체 */
+    height: 480px;
     background: linear-gradient(135deg, var(--blue-light), #fff);
     border: 1px dashed rgba(140,180,213,0.28);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.9rem; letter-spacing: 6px;
+    font-size: 1.7rem; letter-spacing: 6px;
     color: var(--blue-dark); opacity: 0.6;
-    border-radius: 10px; margin-bottom: 30px;
+    border-radius: 12px;
+    text-align: center; padding: 0 20px;
   }
-  .showcase-title {
+  .pmain-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; letter-spacing: 3px;
-    margin-bottom: 8px;
+    font-size: 2.2rem; letter-spacing: 3px;
+    margin-bottom: 14px;
   }
-  .showcase-sub {
-    font-size: 0.82rem; color: var(--blue-dark);
-    letter-spacing: 2px; font-weight: 500;
-    margin-bottom: 18px; text-transform: uppercase;
+  .pmain-copy {
+    font-size: 0.95rem; color: var(--blue-dark);
+    letter-spacing: 1.5px; font-weight: 500;
+    margin-bottom: 30px; line-height: 1.7;
   }
-  .showcase-desc {
-    font-size: 0.9rem; color: var(--gray);
-    line-height: 1.8; font-weight: 300; margin-bottom: 26px;
+  .pmain-features {
+    list-style: none; margin-bottom: 36px;
   }
-  .showcase-more {
-    font-size: 0.78rem; letter-spacing: 2px;
-    color: var(--blue-dark); font-weight: 500;
+  .pmain-features li {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(140,180,213,0.18);
+    font-size: 0.9rem; line-height: 1.7;
+  }
+  .pmain-features li:last-child { border-bottom: 0; }
+  .pmain-features .check {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    background: rgba(140,180,213,0.18);
+    color: var(--blue-dark);
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 600;
+    margin-top: 2px;
+  }
+  .pmain-features strong {
+    color: var(--black); font-weight: 500; margin-right: 4px;
+  }
+  .pmain-features .feat-desc {
+    color: var(--gray); font-weight: 300;
+  }
+  .pmain-cta {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--blue);
+    color: #fff; text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 2.5px;
     text-transform: uppercase;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .pmain-cta:hover {
+    background: var(--blue-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(140,180,213,0.35);
+  }
+
+  /* WHY BROWXING — 3 reason cards */
+  #why-browxing { text-align: center; }
+  #why-browxing .section-desc { margin: 0 auto 60px; }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; max-width: 1100px; margin: 0 auto;
+    text-align: left;
+  }
+  .why-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; color: var(--blue);
+    font-weight: 300; margin-bottom: 16px;
+  }
+  .why-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; letter-spacing: 2px;
+    margin-bottom: 12px; color: var(--black);
+  }
+  .why-desc {
+    font-size: 0.86rem; color: var(--gray);
+    line-height: 1.75; font-weight: 300;
   }
 
   /* REVIEWS */
-  #reviews { text-align: center; }
+  #reviews {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
   #reviews .section-desc { margin: 0 auto 60px; }
   .review-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 30px; max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 30px; max-width: 900px; margin: 0 auto;
     text-align: left;
   }
   .review-stars {
@@ -97,8 +167,7 @@
   }
   .review-body {
     font-size: 0.92rem; color: var(--black);
-    line-height: 1.8; font-weight: 400;
-    margin-bottom: 26px; min-height: 90px;
+    line-height: 1.8; margin-bottom: 26px; min-height: 90px;
   }
   .review-meta {
     border-top: 1px solid rgba(140,180,213,0.2);
@@ -115,10 +184,7 @@
   }
 
   /* FAQ PREVIEW */
-  #faq-preview {
-    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
-    text-align: center;
-  }
+  #faq-preview { text-align: center; }
   #faq-preview .section-desc { margin: 0 auto 50px; }
   .faq-list {
     max-width: 780px; margin: 0 auto 44px;
@@ -139,8 +205,7 @@
   }
   .faq-q {
     display: flex; align-items: center; gap: 18px;
-    font-size: 0.95rem; font-weight: 400;
-    color: var(--black);
+    font-size: 0.95rem; font-weight: 400; color: var(--black);
   }
   .faq-q-mark {
     font-family: 'Cormorant Garamond', serif;
@@ -150,8 +215,9 @@
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .showcase-grid { grid-template-columns: 1fr; max-width: 440px; gap: 30px; }
-    .showcase-img { height: 240px; }
+    .pmain-grid { grid-template-columns: 1fr; gap: 40px; max-width: 460px; }
+    .pmain-img { height: 320px; font-size: 1.3rem; letter-spacing: 4px; }
+    .why-grid { grid-template-columns: 1fr; max-width: 420px; }
     .review-grid { grid-template-columns: 1fr; max-width: 420px; }
   }
 
@@ -271,7 +337,7 @@
     <li class="has-dropdown">
       <a href="products.html" class="dropdown-toggle active">Product <span class="dropdown-caret">▾</span></a>
       <ul class="dropdown-menu">
-        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product-browxing.html" class="active">Browxing</a></li>
         <li><a href="product.html">Clear Wax</a></li>
       </ul>
     </li>
@@ -281,77 +347,115 @@
   <a href="manager.html" class="nav-manager">Manager</a>
 </nav>
 
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="breadcrumb">
+  <a href="products.html">Product</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">Browxing</span>
+</nav>
+
 <!-- HERO -->
 <section class="page-hero">
   <div class="page-hero-content">
-    <p class="page-hero-tag">Our Products</p>
-    <h1 class="page-hero-title">현장에서 만든 <em>프로의 제품</em></h1>
+    <p class="page-hero-tag">Browxing Machine</p>
+    <h1 class="page-hero-title">Browxing <em>Machine</em></h1>
     <div class="page-hero-line"></div>
-    <p class="page-hero-desc">Browxing 머신 · Clear Wax</p>
+    <p class="page-hero-desc">반영구 눈썹 시술의 새로운 기준</p>
   </div>
 </section>
 
-<!-- PRODUCTS SHOWCASE -->
-<section id="products-showcase">
-  <p class="section-tag reveal">Products</p>
-  <h2 class="section-title reveal">은아하다의 <em>두 가지</em> 제품</h2>
-  <p class="section-desc reveal">현장에서 검증된 시술 도구와 재료</p>
+<!-- PRODUCT MAIN -->
+<section id="product-main">
+  <div class="pmain-grid">
+    <div class="pmain-img reveal">
+      <!-- TODO: 실제 Browxing Machine 제품 사진으로 교체 -->
+      BROWXING<br>MACHINE
+    </div>
+    <div>
+      <p class="section-tag reveal">Product</p>
+      <h2 class="pmain-name reveal">Browxing Machine</h2>
+      <p class="pmain-copy reveal">현장에서 검증된 반영구 눈썹 머신</p>
+      <ul class="pmain-features reveal">
+        <li>
+          <span class="check">✓</span>
+          <span>
+            <strong>빠른 시술 시간</strong>
+            <span class="feat-desc">— 기존 반영구 대비 절반</span>
+          </span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span>
+            <strong>자연스러운 결</strong>
+            <span class="feat-desc">— 모발 하나하나 디테일</span>
+          </span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span>
+            <strong>사후 관리 간편</strong>
+            <span class="feat-desc">— 고객 재방문 시스템</span>
+          </span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span>
+            <strong>도입 원스톱</strong>
+            <span class="feat-desc">— 머신 + 교육 + AS</span>
+          </span>
+        </li>
+      </ul>
+      <a href="training-browxing.html" class="pmain-cta reveal">브로우싱 도입반 보기 →</a>
+    </div>
+  </div>
+</section>
 
-  <div class="showcase-grid">
-    <a href="product-browxing.html" class="pcard showcase-card reveal reveal-delay-1" data-tilt>
-      <!-- TODO: Browxing 머신 대표 이미지로 교체 -->
-      <div class="showcase-img">BROWXING MACHINE</div>
-      <h3 class="showcase-title">Browxing Machine</h3>
-      <p class="showcase-sub">반영구 눈썹 시술 머신</p>
-      <p class="showcase-desc">
-        반영구 눈썹의 새로운 기준.
-        시술 시간 단축 + 자연스러운 결 + 고객 만족도.
-      </p>
-      <span class="showcase-more">자세히 보기 →</span>
-    </a>
-    <a href="product.html" class="pcard showcase-card reveal reveal-delay-2" data-tilt>
-      <!-- TODO: Clear Wax 제품 대표 이미지로 교체 -->
-      <div class="showcase-img">CLEAR WAX</div>
-      <h3 class="showcase-title">Clear Wax</h3>
-      <p class="showcase-sub">프로페셔널 왁싱 왁스</p>
-      <p class="showcase-desc">
-        현장에서 8년간 만족하지 못해 직접 만든 왁스.
-        전국 원장님이 월 200kg 소비 중.
-      </p>
-      <span class="showcase-more">자세히 보기 →</span>
-    </a>
+<!-- WHY BROWXING -->
+<section id="why-browxing">
+  <p class="section-tag reveal">Why Browxing</p>
+  <h2 class="section-title reveal">원장님들이 선택하는 <em>3가지 이유</em></h2>
+  <p class="section-desc reveal">현장에서 입증된 머신의 가치</p>
+
+  <div class="why-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <div class="why-num">01</div>
+      <h3 class="why-title">검증된 시장</h3>
+      <p class="why-desc">전국 100곳 이상의 도입 샵 실적. 검증 완료된 비즈니스 모델로 안정적인 시작.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <div class="why-num">02</div>
+      <h3 class="why-title">기술력</h3>
+      <p class="why-desc">박은아 원장님의 8년 노하우가 담긴 머신. 현장에서 다듬어진 디테일.</p>
+    </div>
+    <div class="pcard reveal reveal-delay-3" data-tilt>
+      <div class="why-num">03</div>
+      <h3 class="why-title">통합 지원</h3>
+      <p class="why-desc">세미나 교육 + 사후 AS + 마케팅 가이드까지. 도입 후에도 끝까지 함께합니다.</p>
+    </div>
   </div>
 </section>
 
 <!-- REVIEWS -->
 <section id="reviews">
   <p class="section-tag reveal">Reviews</p>
-  <h2 class="section-title reveal">원장님들의 <em>리얼 후기</em></h2>
-  <p class="section-desc reveal">제품을 직접 써본 원장님들의 이야기</p>
+  <h2 class="section-title reveal">도입 원장님 <em>리얼 후기</em></h2>
+  <p class="section-desc reveal">Browxing Machine을 직접 도입한 원장님들의 이야기</p>
 
   <div class="review-grid">
     <div class="pcard reveal reveal-delay-1" data-tilt>
       <div class="review-stars">★★★★★</div>
-      <p class="review-body">클리어 왁스 한 번 써보면 다른 왁스 못 써요. 발림성과 제거력이 차원이 달라서 시술 속도까지 빨라졌습니다.</p>
-      <div class="review-meta">
-        <p class="review-name">이O영 원장</p>
-        <p class="review-shop">부산 해운대 · OO왁싱</p>
-      </div>
-    </div>
-    <div class="pcard reveal reveal-delay-2" data-tilt>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-body">브로우싱 도입 후 객단가 50% 상승. 기존 고객이 반영구까지 이어가면서 샵 매출이 완전히 다른 레벨로 올라갔어요.</p>
+      <p class="review-body">객단가 50% 상승, 재방문율도 함께 개선됐습니다. 기존 왁싱 고객이 자연스럽게 반영구로 이어져 매출 구조가 바뀌었어요.</p>
       <div class="review-meta">
         <p class="review-name">김O희 원장</p>
         <p class="review-shop">서울 강남 · OO뷰티</p>
       </div>
     </div>
-    <div class="pcard reveal reveal-delay-3" data-tilt>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
       <div class="review-stars">★★★★★</div>
-      <p class="review-body">왁스 재구매율 100%. 한 번 쓰기 시작한 원장님들 전부 그대로 쓰십니다. 품질이 일정해서 믿고 발주 넣어요.</p>
+      <p class="review-body">자연스러운 결이 진짜 차이를 만듭니다. 시술 시간도 줄고 고객 만족도가 눈에 띄게 올라서 입소문이 빠릅니다.</p>
       <div class="review-meta">
-        <p class="review-name">박O진 원장</p>
-        <p class="review-shop">경기 분당 · OO살롱</p>
+        <p class="review-name">이O영 원장</p>
+        <p class="review-shop">부산 해운대 · OO왁싱</p>
       </div>
     </div>
   </div>
@@ -360,18 +464,18 @@
 <!-- FAQ PREVIEW -->
 <section id="faq-preview">
   <p class="section-tag reveal">FAQ</p>
-  <h2 class="section-title reveal">제품 관련 <em>자주 묻는 질문</em></h2>
+  <h2 class="section-title reveal">Browxing <em>자주 묻는 질문</em></h2>
   <p class="section-desc reveal">가장 많이 문의 주시는 내용을 모았습니다</p>
 
   <div class="faq-list">
     <div class="faq-item reveal reveal-delay-1">
-      <div class="faq-q"><span class="faq-q-mark">Q.</span>클리어 왁스 주문은 어떻게 하나요?</div>
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>머신 가격과 도입 절차가 궁금합니다.</div>
     </div>
     <div class="faq-item reveal reveal-delay-2">
-      <div class="faq-q"><span class="faq-q-mark">Q.</span>브로우싱 머신 도입 절차가 궁금합니다.</div>
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>반영구 경험이 없어도 도입 가능한가요?</div>
     </div>
     <div class="faq-item reveal reveal-delay-3">
-      <div class="faq-q"><span class="faq-q-mark">Q.</span>처음인데 샘플 받을 수 있나요?</div>
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>사후 관리와 AS는 어떻게 받나요?</div>
     </div>
   </div>
 
@@ -381,9 +485,9 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-content">
-    <p class="section-tag reveal">Get in Touch</p>
-    <h2 class="cta-title reveal">도매 <em>문의</em></h2>
-    <p class="cta-desc reveal">수량 · 배송 · 결제 방식 안내</p>
+    <p class="section-tag reveal">Contact</p>
+    <h2 class="cta-title reveal">Browxing <em>도입 문의</em></h2>
+    <p class="cta-desc reveal">머신 · 세미나 · 가격 안내</p>
     <div class="reveal">
       <a href="tel:010-9944-7901" class="cta-btn">전화 문의</a>
       <a href="#" class="cta-btn-outline">카카오톡 문의</a>

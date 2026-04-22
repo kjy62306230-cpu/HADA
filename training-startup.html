@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>왁싱 창업반 — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== TRAINING STARTUP PAGE STYLES ===== */
+
+  /* Hero compact — breadcrumb above already clears the fixed nav,
+     so only small top padding needed. Override section's default 120/120 padding
+     so content doesn't overflow inside the shorter box (box-sizing: border-box). */
+  .page-hero {
+    height: auto; min-height: 200px;
+    padding: 40px 60px 40px;
+  }
+  @media (max-width: 900px) {
+    .page-hero { min-height: 180px; padding: 30px 24px 28px; }
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    max-width: 1200px; margin: 0 auto;
+    padding: 110px 60px 0;
+    font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gray);
+  }
+  .breadcrumb a { color: var(--gray); text-decoration: none; transition: color 0.25s ease; }
+  .breadcrumb a:hover { color: var(--blue-dark); }
+  .breadcrumb a::after { display: none; }
+  .breadcrumb-sep { margin: 0 12px; color: var(--blue); opacity: 0.6; }
+  .breadcrumb-current { color: var(--black); }
+  @media (max-width: 900px) {
+    .breadcrumb { padding: 90px 24px 0; font-size: 0.66rem; letter-spacing: 2px; }
+  }
+
+  /* Shared card base — same tone as products.html .pcard */
+  .pcard {
+    padding: 36px 28px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(140,180,213,0.12);
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                background 0.4s ease;
+  }
+  .pcard:hover {
+    transform: translateY(-6px);
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(140,180,213,0.22),
+                0 0 0 1px rgba(140,180,213,0.3);
+  }
+
+  /* ===== STEPS — 4 STEPS ROADMAP ===== */
+  #steps { text-align: center; }
+  #steps .section-desc { margin: 0 auto 60px; }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 34px; max-width: 920px; margin: 0 auto;
+    text-align: left;
+  }
+  .step-card {
+    position: relative;
+    padding: 40px 34px;
+  }
+  .step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 400;
+    color: var(--blue); line-height: 1;
+    margin-bottom: 18px;
+  }
+  .step-kicker {
+    font-size: 0.72rem; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-dark); font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; letter-spacing: 2px;
+    color: var(--black); font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .step-desc {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.8; font-weight: 300;
+  }
+
+  /* ===== WHY US ===== */
+  #why {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+  }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; max-width: 1100px; margin: 0 auto;
+    align-items: center;
+  }
+  .why-image {
+    /* TODO: 교육 현장 대표 이미지로 교체 */
+    height: 440px;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.35);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; letter-spacing: 5px;
+    color: var(--blue-dark); opacity: 0.6;
+    text-align: center; padding: 0 20px;
+  }
+  .why-content .section-tag,
+  .why-content .section-title {
+    text-align: left;
+  }
+  .why-list {
+    list-style: none;
+    margin-top: 34px;
+  }
+  .why-list li {
+    position: relative;
+    padding: 18px 0 18px 44px;
+    border-bottom: 1px solid rgba(140,180,213,0.15);
+  }
+  .why-list li:last-child { border-bottom: none; }
+  .why-check {
+    position: absolute; left: 0; top: 20px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(140,180,213,0.15);
+    color: var(--blue-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; font-weight: 600;
+  }
+  .why-title {
+    font-size: 0.94rem; color: var(--black);
+    font-weight: 500; letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .why-title-sep { color: var(--blue); margin: 0 8px; font-weight: 300; }
+  .why-desc {
+    font-size: 0.82rem; color: var(--gray);
+    font-weight: 300; line-height: 1.7;
+  }
+
+  /* ===== SAMPLE VIDEO ===== */
+  #sample { text-align: center; }
+  #sample .section-desc { margin: 0 auto 60px; }
+  .video-placeholder {
+    /* TODO: 실제 교육 영상 iframe(YouTube) 또는 video 태그로 교체 */
+    position: relative;
+    max-width: 900px; margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.35);
+    border-radius: 14px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 26px;
+    overflow: hidden;
+  }
+  .video-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; letter-spacing: 6px;
+    color: var(--blue-dark); opacity: 0.6;
+  }
+  .play-button {
+    width: 78px; height: 78px; border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(140,180,213,0.4);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px rgba(140,180,213,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .play-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 16px 40px rgba(140,180,213,0.35);
+  }
+  .play-triangle {
+    width: 0; height: 0;
+    border-left: 18px solid var(--blue-dark);
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    margin-left: 5px;
+  }
+
+  /* ===== STORIES ===== */
+  #stories {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #stories .section-desc { margin: 0 auto 60px; }
+  .stories-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px; max-width: 1100px; margin: 0 auto;
+    text-align: left;
+  }
+  .story-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; letter-spacing: 2px;
+    color: var(--blue-dark); font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .story-meta {
+    font-size: 0.76rem; color: var(--gray);
+    letter-spacing: 1px; font-weight: 300;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(140,180,213,0.2);
+  }
+  .story-body {
+    font-size: 0.9rem; color: var(--black);
+    line-height: 1.8; font-weight: 400;
+    margin: 18px 0;
+  }
+  .review-stars {
+    color: #E6B84F; letter-spacing: 2px;
+    font-size: 0.9rem;
+  }
+
+  /* ===== FAQ PREVIEW ===== */
+  #faq-preview { text-align: center; }
+  #faq-preview .section-desc { margin: 0 auto 50px; }
+  .faq-list {
+    max-width: 780px; margin: 0 auto 44px;
+    text-align: left;
+  }
+  .faq-item {
+    padding: 26px 28px;
+    border: 1px solid rgba(140,180,213,0.15);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.7);
+    transition: all 0.3s ease;
+  }
+  .faq-item:hover {
+    border-color: rgba(140,180,213,0.35);
+    background: #fff;
+    transform: translateX(4px);
+  }
+  .faq-q {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 0.95rem; font-weight: 400;
+    color: var(--black);
+  }
+  .faq-q-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--blue);
+    font-weight: 300; flex-shrink: 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr; max-width: 440px; gap: 22px; }
+    .step-card { padding: 32px 26px; }
+    .why-grid { grid-template-columns: 1fr; gap: 36px; max-width: 440px; }
+    .why-image { height: 260px; font-size: 1.2rem; letter-spacing: 4px; }
+    .why-content .section-tag,
+    .why-content .section-title { text-align: center; }
+    .stories-grid { grid-template-columns: 1fr; max-width: 440px; }
+    .video-label { font-size: 1.1rem; letter-spacing: 3px; }
+    .play-button { width: 62px; height: 62px; }
+    .play-triangle {
+      border-left: 14px solid var(--blue-dark);
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+    }
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+  .dropdown-menu a.active { color: var(--blue); }
+
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* Outline CTA variant */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px; margin-left: 12px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  @media (max-width: 600px) {
+    .cta-btn-outline { margin-left: 0; margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle active">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html" class="active">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
+  </ul>
+  <a href="manager.html" class="nav-manager">Manager</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="breadcrumb">
+  <a href="training.html">Training</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">왁싱 창업반</span>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Course 02</p>
+    <h1 class="page-hero-title">왁싱샵 <em>창업반</em></h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">왁싱샵 창업 A to Z</p>
+  </div>
+</section>
+
+<!-- 4 STEPS ROADMAP -->
+<section id="steps">
+  <p class="section-tag reveal">4 Steps</p>
+  <h2 class="section-title reveal">창업 <em>4단계</em> 로드맵</h2>
+  <p class="section-desc reveal">기획부터 오픈까지 시행착오 없이</p>
+
+  <div class="steps-grid">
+    <div class="pcard step-card reveal reveal-delay-1" data-tilt>
+      <div class="step-number">01</div>
+      <p class="step-kicker">Planning</p>
+      <h3 class="step-title">기획</h3>
+      <p class="step-desc">
+        컨셉 · 타겟 · 차별화.
+        어떤 샵을 만들지 뾰족하게 정의하는 단계.
+      </p>
+    </div>
+    <div class="pcard step-card reveal reveal-delay-2" data-tilt>
+      <div class="step-number">02</div>
+      <p class="step-kicker">Location</p>
+      <h3 class="step-title">입지</h3>
+      <p class="step-desc">
+        상권 분석 · 임대 계약.
+        매출을 좌우하는 가장 중요한 결정.
+      </p>
+    </div>
+    <div class="pcard step-card reveal reveal-delay-3" data-tilt>
+      <div class="step-number">03</div>
+      <p class="step-kicker">Setup</p>
+      <h3 class="step-title">셋업</h3>
+      <p class="step-desc">
+        인테리어 · 시설 · 장비 · 초기 투자.
+        예산 대비 효율을 극대화하는 구성.
+      </p>
+    </div>
+    <div class="pcard step-card reveal reveal-delay-4" data-tilt>
+      <div class="step-number">04</div>
+      <p class="step-kicker">Launch</p>
+      <h3 class="step-title">런칭</h3>
+      <p class="step-desc">
+        마케팅 · 고객 유치 · 운영 시스템.
+        오픈 후 3개월이 1년을 결정합니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-grid">
+    <!-- TODO: 교육 현장 대표 이미지로 교체 -->
+    <div class="why-image reveal">WHY EUN A HADA</div>
+
+    <div class="why-content">
+      <p class="section-tag reveal">Why Us</p>
+      <h2 class="section-title reveal">은아하다가 <em>함께합니다</em></h2>
+
+      <ul class="why-list">
+        <li class="reveal reveal-delay-1">
+          <span class="why-check">✓</span>
+          <p class="why-title">현장 경험 8년<span class="why-title-sep">—</span><span class="why-desc">박은아 원장님 직접 진행</span></p>
+        </li>
+        <li class="reveal reveal-delay-2">
+          <span class="why-check">✓</span>
+          <p class="why-title">제품 공급까지 원스톱<span class="why-title-sep">—</span><span class="why-desc">클리어왁스 포함</span></p>
+        </li>
+        <li class="reveal reveal-delay-3">
+          <span class="why-check">✓</span>
+          <p class="why-title">사후 관리<span class="why-title-sep">—</span><span class="why-desc">오픈 후 6개월 멘토링</span></p>
+        </li>
+        <li class="reveal reveal-delay-4">
+          <span class="why-check">✓</span>
+          <p class="why-title">검증된 성공 사례<span class="why-title-sep">—</span><span class="why-desc">전국 100곳 파트너샵</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE VIDEO -->
+<section id="sample">
+  <p class="section-tag reveal">Sample</p>
+  <h2 class="section-title reveal">현장 <em>실전 영상</em></h2>
+  <p class="section-desc reveal">실제 창업반 교육 현장을 먼저 확인해보세요</p>
+
+  <!-- TODO: 실제 교육 영상 iframe(YouTube) 또는 video 태그로 교체 -->
+  <div class="video-placeholder reveal">
+    <span class="video-label">WAXING SKILL SAMPLE</span>
+    <div class="play-button" aria-label="재생">
+      <div class="play-triangle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS STORIES -->
+<section id="stories">
+  <p class="section-tag reveal">Success Stories</p>
+  <h2 class="section-title reveal">원장님들의 <em>성공 이야기</em></h2>
+  <p class="section-desc reveal">은아하다와 함께 오픈한 샵들</p>
+
+  <div class="stories-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <h3 class="story-name">OO왁싱살롱</h3>
+      <p class="story-meta">서울 강남 · 2024</p>
+      <p class="story-body">오픈 2개월 차 손익분기. 입지 분석과 초기 마케팅을 같이 봐주셔서 시행착오가 거의 없었어요.</p>
+      <div class="review-stars">★★★★★</div>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <h3 class="story-name">OO뷰티</h3>
+      <p class="story-meta">부산 해운대 · 2024</p>
+      <p class="story-body">객단가 50% 상승. 브로우싱까지 도입하면서 재방문 고객의 지갑 크기가 바뀌었습니다.</p>
+      <div class="review-stars">★★★★★</div>
+    </div>
+    <div class="pcard reveal reveal-delay-3" data-tilt>
+      <h3 class="story-name">OO살롱</h3>
+      <p class="story-meta">경기 분당 · 2025</p>
+      <p class="story-body">월 재방문율 70%+. 창업 후에도 정기적으로 운영 상담 받을 수 있어서 안정적입니다.</p>
+      <div class="review-stars">★★★★★</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PREVIEW -->
+<section id="faq-preview">
+  <p class="section-tag reveal">FAQ</p>
+  <h2 class="section-title reveal">창업 <em>자주 묻는 질문</em></h2>
+
+  <div class="faq-list">
+    <div class="faq-item reveal reveal-delay-1">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>왁싱 경력이 없어도 창업할 수 있나요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>초기 창업 비용은 얼마나 필요한가요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-3">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>오픈 후 사후 관리는 어떻게 되나요?</div>
+    </div>
+  </div>
+
+  <a href="qna.html#startup" class="link-btn reveal">전체 Q&amp;A 보기 →</a>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Get in Touch</p>
+    <h2 class="cta-title reveal">창업 <em>상담 신청</em></h2>
+    <p class="cta-desc reveal">원장님의 상황에 맞는 창업 플랜 상담</p>
+    <div class="reveal">
+      <a href="tel:010-9944-7901" class="cta-btn">전화 상담</a>
+      <a href="#" class="cta-btn-outline">카카오톡 문의</a>
+    </div>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>

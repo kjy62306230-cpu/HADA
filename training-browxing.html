@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browxing 도입반 — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== TRAINING · BROWXING 도입반 PAGE STYLES ===== */
+
+  /* Hero compact — breadcrumb above already clears the fixed nav,
+     so only small top padding needed. Override section's default 120/120 padding
+     so content doesn't overflow inside the shorter box (box-sizing: border-box). */
+  .page-hero {
+    height: auto; min-height: 200px;
+    padding: 40px 60px 40px;
+  }
+  @media (max-width: 900px) {
+    .page-hero { min-height: 180px; padding: 30px 24px 28px; }
+  }
+
+  /* ===== BREADCRUMB ===== */
+  .breadcrumb {
+    max-width: 1200px; margin: 0 auto;
+    padding: 110px 60px 0;
+    font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gray);
+  }
+  .breadcrumb a { color: var(--gray); text-decoration: none; transition: color 0.25s ease; }
+  .breadcrumb a:hover { color: var(--blue-dark); }
+  .breadcrumb a::after { display: none; }
+  .breadcrumb-sep { margin: 0 12px; color: var(--blue); opacity: 0.6; }
+  .breadcrumb-current { color: var(--black); }
+  @media (max-width: 900px) {
+    .breadcrumb { padding: 90px 24px 0; font-size: 0.66rem; letter-spacing: 2px; }
+  }
+
+  /* Shared card base — same tone as products.html .pcard */
+  .pcard {
+    padding: 36px 28px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(140,180,213,0.12);
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                background 0.4s ease;
+  }
+  .pcard:hover {
+    transform: translateY(-6px);
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(140,180,213,0.22),
+                0 0 0 1px rgba(140,180,213,0.3);
+  }
+
+  /* ===== CURRICULUM ===== */
+  #curriculum {
+    background: #fff;
+  }
+  .curriculum-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; max-width: 1100px; margin: 0 auto;
+    align-items: start;
+  }
+  .curriculum-visual {
+    position: sticky; top: 120px;
+    height: 520px;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.35);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; letter-spacing: 7px;
+    color: var(--blue-dark); opacity: 0.6;
+  }
+  .curriculum-right .section-desc { margin: 0 0 50px; }
+  .curriculum-list { margin-bottom: 44px; }
+  .curriculum-item {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 20px;
+    padding: 26px 0;
+    border-bottom: 1px solid rgba(140,180,213,0.18);
+    transition: padding-left 0.3s ease, border-color 0.3s ease;
+  }
+  .curriculum-item:hover {
+    padding-left: 8px;
+    border-bottom-color: rgba(140,180,213,0.4);
+  }
+  .curriculum-item:last-child { border-bottom: none; }
+  .curriculum-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400;
+    color: var(--blue); letter-spacing: 1px;
+    line-height: 1.2;
+  }
+  .curriculum-title {
+    font-size: 1rem; font-weight: 500;
+    letter-spacing: 1.5px; color: var(--black);
+    margin-bottom: 8px;
+  }
+  .curriculum-desc {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.75; font-weight: 300;
+  }
+
+  .info-box {
+    background: rgba(224,237,245,0.35);
+    border: 1px solid rgba(140,180,213,0.2);
+    border-radius: 12px;
+    padding: 32px 30px;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    row-gap: 16px; column-gap: 20px;
+  }
+  .info-label {
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-dark); font-weight: 500;
+  }
+  .info-value {
+    font-size: 0.88rem; color: var(--black);
+    font-weight: 400; line-height: 1.5;
+  }
+
+  /* ===== SAMPLE VIDEO ===== */
+  #sample {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #sample .section-desc { margin: 0 auto 60px; }
+  .video-placeholder {
+    position: relative;
+    max-width: 900px; aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.32);
+    border-radius: 14px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--blue-dark); opacity: 0.85;
+    overflow: hidden;
+  }
+  .video-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; letter-spacing: 7px;
+    color: var(--blue-dark); opacity: 0.55;
+    margin-top: 24px;
+  }
+  .play-circle {
+    width: 86px; height: 86px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(140,180,213,0.45);
+    box-shadow: 0 10px 40px rgba(140,180,213,0.2);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .video-placeholder:hover .play-circle {
+    transform: scale(1.08);
+    box-shadow: 0 14px 50px rgba(140,180,213,0.32);
+  }
+  .play-circle::before {
+    content: '';
+    width: 0; height: 0;
+    border-left: 22px solid var(--blue-dark);
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    margin-left: 6px;
+  }
+
+  /* ===== REVIEWS ===== */
+  #reviews { text-align: center; }
+  #reviews .section-desc { margin: 0 auto 60px; }
+  .review-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 30px; max-width: 1000px; margin: 0 auto;
+    text-align: left;
+  }
+  .review-stars {
+    color: #E6B84F; letter-spacing: 2px;
+    font-size: 0.9rem; margin-bottom: 18px;
+  }
+  .review-body {
+    font-size: 0.92rem; color: var(--black);
+    line-height: 1.8; font-weight: 400;
+    margin-bottom: 26px; min-height: 90px;
+  }
+  .review-meta {
+    border-top: 1px solid rgba(140,180,213,0.2);
+    padding-top: 16px;
+  }
+  .review-name {
+    font-size: 0.88rem; letter-spacing: 1.5px;
+    color: var(--blue-dark); font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .review-shop {
+    font-size: 0.76rem; color: var(--gray);
+    letter-spacing: 1px; font-weight: 300;
+  }
+
+  /* ===== FAQ PREVIEW ===== */
+  #faq-preview {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #faq-preview .section-desc { margin: 0 auto 50px; }
+  .faq-list {
+    max-width: 780px; margin: 0 auto 44px;
+    text-align: left;
+  }
+  .faq-item {
+    padding: 26px 28px;
+    border: 1px solid rgba(140,180,213,0.15);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.7);
+    transition: all 0.3s ease;
+  }
+  .faq-item:hover {
+    border-color: rgba(140,180,213,0.35);
+    background: #fff;
+    transform: translateX(4px);
+  }
+  .faq-q {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 0.95rem; font-weight: 400;
+    color: var(--black);
+  }
+  .faq-q-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--blue);
+    font-weight: 300; flex-shrink: 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .curriculum-grid {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+      gap: 40px;
+    }
+    .curriculum-visual {
+      position: static;
+      height: 280px;
+      font-size: 1.5rem;
+      letter-spacing: 5px;
+    }
+    .info-grid {
+      grid-template-columns: 100px 1fr;
+      row-gap: 14px;
+    }
+    .review-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .video-placeholder { border-radius: 10px; }
+    .video-label { font-size: 1.2rem; letter-spacing: 4px; }
+    .play-circle { width: 64px; height: 64px; }
+    .play-circle::before {
+      border-left: 16px solid var(--blue-dark);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 4px;
+    }
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+  .dropdown-menu a.active { color: var(--blue); }
+
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* Outline CTA variant */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px; margin-left: 12px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  @media (max-width: 600px) {
+    .cta-btn-outline { margin-left: 0; margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle active">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html" class="active">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
+  </ul>
+  <a href="manager.html" class="nav-manager">Manager</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="breadcrumb">
+  <a href="training.html">Training</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">Browxing 도입반</span>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Course 01</p>
+    <h1 class="page-hero-title">Browxing <em>도입반</em></h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">반영구 눈썹 시술의 새로운 기준</p>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="curriculum">
+  <div class="curriculum-grid">
+    <!-- LEFT: Visual / Image -->
+    <!-- TODO: 실제 머신 이미지로 교체 -->
+    <div class="curriculum-visual reveal">BROWXING</div>
+
+    <!-- RIGHT: Curriculum content -->
+    <div class="curriculum-right">
+      <p class="section-tag reveal">Curriculum</p>
+      <h2 class="section-title reveal">4단계로 <em>완성</em></h2>
+      <p class="section-desc reveal">이론부터 실전 트레이닝, 사후 관리까지</p>
+
+      <div class="curriculum-list">
+        <div class="curriculum-item reveal reveal-delay-1">
+          <div class="curriculum-num">01.</div>
+          <div>
+            <h3 class="curriculum-title">브로우싱 머신 이해</h3>
+            <p class="curriculum-desc">머신의 구조 · 작동 원리 · 안전한 사용법을 체계적으로 익힙니다.</p>
+          </div>
+        </div>
+        <div class="curriculum-item reveal reveal-delay-2">
+          <div class="curriculum-num">02.</div>
+          <div>
+            <h3 class="curriculum-title">피부 타입별 시술법</h3>
+            <p class="curriculum-desc">피부 결 · 색소 발현 · 모질에 따라 달라지는 테크닉을 배웁니다.</p>
+          </div>
+        </div>
+        <div class="curriculum-item reveal reveal-delay-3">
+          <div class="curriculum-num">03.</div>
+          <div>
+            <h3 class="curriculum-title">실전 시술 트레이닝</h3>
+            <p class="curriculum-desc">실제 모델 대상 반복 훈련으로 현장 감각을 체득합니다.</p>
+          </div>
+        </div>
+        <div class="curriculum-item reveal reveal-delay-4">
+          <div class="curriculum-num">04.</div>
+          <div>
+            <h3 class="curriculum-title">사후 관리 및 AS</h3>
+            <p class="curriculum-desc">시술 후 관리 프로토콜과 고객 리텐션 전략까지 다룹니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box reveal">
+        <div class="info-grid">
+          <div class="info-label">교육 기간</div>
+          <div class="info-value">2~3일 집중 과정</div>
+
+          <div class="info-label">수강 인원</div>
+          <div class="info-value">소수 정예 (최대 6명)</div>
+
+          <div class="info-label">수강료</div>
+          <div class="info-value">문의 (머신 도입 시 혜택)</div>
+
+          <div class="info-label">다음 일정</div>
+          <div class="info-value">카카오톡 문의</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE VIDEO -->
+<section id="sample">
+  <p class="section-tag reveal">Sample</p>
+  <h2 class="section-title reveal">시술 <em>샘플 영상</em></h2>
+  <p class="section-desc reveal">실제 시술 현장을 먼저 확인해보세요</p>
+
+  <!-- TODO: 실제 시술 영상 iframe(YouTube 등) 또는 video 태그로 교체 -->
+  <div class="video-placeholder reveal reveal-delay-1">
+    <div class="play-circle" aria-hidden="true"></div>
+    <div class="video-label">BROWXING SAMPLE</div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-tag reveal">Reviews</p>
+  <h2 class="section-title reveal">수강생 <em>리얼 후기</em></h2>
+  <p class="section-desc reveal">Browxing 도입반을 수강한 원장님들</p>
+
+  <div class="review-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">기존 반영구보다 훨씬 자연스럽고 시술 시간이 절반으로 줄었어요. 고객 만족도도 눈에 띄게 올랐습니다.</p>
+      <div class="review-meta">
+        <p class="review-name">김O희 원장</p>
+        <p class="review-shop">서울 강남 · OO뷰티</p>
+      </div>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">현장 중심 세미나여서 배운 걸 바로 샵에 적용할 수 있었어요. 반영구가 처음이었는데 자신감이 붙었습니다.</p>
+      <div class="review-meta">
+        <p class="review-name">이O영 원장</p>
+        <p class="review-shop">부산 해운대 · OO왁싱</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PREVIEW -->
+<section id="faq-preview">
+  <p class="section-tag reveal">FAQ</p>
+  <h2 class="section-title reveal">Browxing <em>자주 묻는 질문</em></h2>
+  <p class="section-desc reveal">수강 전 많이 문의 주시는 내용을 모았습니다</p>
+
+  <div class="faq-list">
+    <div class="faq-item reveal reveal-delay-1">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>반영구 경험이 없어도 수강 가능한가요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>머신 가격과 도입 절차가 궁금합니다.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-3">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>수강 후 AS는 어떻게 받나요?</div>
+    </div>
+  </div>
+
+  <a href="qna.html#browxing" class="link-btn reveal">전체 Q&amp;A 보기 →</a>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Get in Touch</p>
+    <h2 class="cta-title reveal">Browxing <em>수강 신청</em></h2>
+    <p class="cta-desc reveal">다음 세미나 일정 안내받아보세요</p>
+    <div class="reveal">
+      <a href="tel:010-9944-7901" class="cta-btn">전화 상담</a>
+      <a href="#" class="cta-btn-outline">카카오톡 문의</a>
+    </div>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>
