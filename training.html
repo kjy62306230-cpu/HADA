@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== TRAINING PAGE STYLES ===== */
+
+  /* Shared card base — reuses Philosophy tone from about.html */
+  .tcard {
+    padding: 36px 28px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(140,180,213,0.12);
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                background 0.4s ease;
+  }
+  .tcard:hover {
+    transform: translateY(-6px);
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(140,180,213,0.22),
+                0 0 0 1px rgba(140,180,213,0.3);
+  }
+
+  /* MAP SECTION */
+  #map-section {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+    text-align: center;
+  }
+  #map-section .section-desc { margin: 0 auto 50px; }
+  .map-placeholder {
+    max-width: 880px; margin: 0 auto 60px;
+    height: 440px;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.35);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; letter-spacing: 8px;
+    color: var(--blue-dark); opacity: 0.6;
+  }
+  /* TODO: 실제 네이버 지도 API 연동 예정 */
+
+  .region-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; max-width: 1000px; margin: 0 auto;
+    text-align: left;
+  }
+  .region-card { text-align: left; }
+  .region-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; letter-spacing: 2px;
+    color: var(--blue-dark); margin-bottom: 10px;
+  }
+  .region-shops {
+    font-size: 0.82rem; color: var(--gray);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  /* PROGRAMS */
+  #programs { text-align: center; }
+  #programs .section-desc { margin: 0 auto 60px; }
+  .program-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 34px; max-width: 1100px; margin: 0 auto;
+  }
+  a.program-card {
+    text-decoration: none; color: inherit; display: block;
+  }
+  .program-card { text-align: left; }
+  .program-img {
+    /* TODO: 실제 프로그램 대표 이미지로 교체 */
+    height: 200px;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.28);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; letter-spacing: 5px;
+    color: var(--blue-dark); opacity: 0.6;
+    border-radius: 8px; margin-bottom: 26px;
+  }
+  .program-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+  .program-desc {
+    font-size: 0.84rem; color: var(--gray);
+    line-height: 1.75; font-weight: 300; margin-bottom: 22px;
+  }
+  .program-more {
+    font-size: 0.78rem; letter-spacing: 2px;
+    color: var(--blue-dark); font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  /* REVIEWS */
+  #reviews {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #reviews .section-desc { margin: 0 auto 60px; }
+  .review-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; max-width: 1100px; margin: 0 auto;
+    text-align: left;
+  }
+  .review-stars {
+    color: #E6B84F; letter-spacing: 2px;
+    font-size: 0.9rem; margin-bottom: 18px;
+  }
+  .review-body {
+    font-size: 0.92rem; color: var(--black);
+    line-height: 1.8; font-weight: 400;
+    margin-bottom: 26px; min-height: 90px;
+  }
+  .review-meta {
+    border-top: 1px solid rgba(140,180,213,0.2);
+    padding-top: 16px;
+  }
+  .review-name {
+    font-size: 0.88rem; letter-spacing: 1.5px;
+    color: var(--blue-dark); font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .review-shop {
+    font-size: 0.76rem; color: var(--gray);
+    letter-spacing: 1px; font-weight: 300;
+  }
+
+  /* FAQ PREVIEW */
+  #faq-preview { text-align: center; }
+  #faq-preview .section-desc { margin: 0 auto 50px; }
+  .faq-list {
+    max-width: 780px; margin: 0 auto 44px;
+    text-align: left;
+  }
+  .faq-item {
+    padding: 26px 28px;
+    border: 1px solid rgba(140,180,213,0.15);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.7);
+    transition: all 0.3s ease;
+  }
+  .faq-item:hover {
+    border-color: rgba(140,180,213,0.35);
+    background: #fff;
+    transform: translateX(4px);
+  }
+  .faq-q {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 0.95rem; font-weight: 400;
+    color: var(--black);
+  }
+  .faq-q-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--blue);
+    font-weight: 300; flex-shrink: 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .region-grid,
+    .program-grid,
+    .review-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .map-placeholder { height: 280px; font-size: 1.6rem; letter-spacing: 5px; }
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern from other pages) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+  .dropdown-menu a.active { color: var(--blue); }
+
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* Outline CTA button variant (카카오톡) */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px; margin-left: 12px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  @media (max-width: 600px) {
+    .cta-btn-outline { margin-left: 0; margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle active">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
+  </ul>
+  <a href="manager.html" class="nav-manager">Manager</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Training &amp; Education</p>
+    <h1 class="page-hero-title">전국 원장님들과 <em>함께</em> 성장합니다</h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">은아하다의 교육과 세미나, 그리고 파트너 네트워크</p>
+  </div>
+</section>
+
+<!-- MAP / NETWORK -->
+<section id="map-section">
+  <p class="section-tag reveal">Our Network</p>
+  <h2 class="section-title reveal">전국의 <em>은아하다 파트너샵</em></h2>
+  <p class="section-desc reveal">100곳 이상의 원장님들이 은아하다와 함께하고 있습니다</p>
+
+  <!-- TODO: 실제 네이버 지도 API 연동 예정 -->
+  <div class="map-placeholder reveal">KOREA MAP</div>
+
+  <div class="region-grid">
+    <div class="tcard region-card reveal reveal-delay-1" data-tilt>
+      <h3 class="region-name">서울</h3>
+      <p class="region-shops">강남 · 홍대 외 24곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-2" data-tilt>
+      <h3 class="region-name">경기</h3>
+      <p class="region-shops">분당 · 일산 외 21곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-3" data-tilt>
+      <h3 class="region-name">부산 · 경남</h3>
+      <p class="region-shops">해운대 · 창원 외 18곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-1" data-tilt>
+      <h3 class="region-name">대구 · 경북</h3>
+      <p class="region-shops">수성 · 포항 외 14곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-2" data-tilt>
+      <h3 class="region-name">인천</h3>
+      <p class="region-shops">송도 · 부평 외 12곳</p>
+    </div>
+    <div class="tcard region-card reveal reveal-delay-3" data-tilt>
+      <h3 class="region-name">대전 · 충청</h3>
+      <p class="region-shops">둔산 · 천안 외 11곳</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <p class="section-tag reveal">Programs</p>
+  <h2 class="section-title reveal">은아하다의 <em>교육 과정</em></h2>
+  <p class="section-desc reveal">원장님의 목표에 맞는 과정을 선택하세요</p>
+
+  <div class="program-grid">
+    <a href="training-browxing.html" class="tcard program-card reveal reveal-delay-1" data-tilt>
+      <!-- TODO: Browxing 도입반 대표 이미지로 교체 -->
+      <div class="program-img">BROWXING</div>
+      <h3 class="program-title">Browxing 도입반</h3>
+      <p class="program-desc">
+        반영구 눈썹 시술의 새로운 기준.
+        머신 도입부터 시술 기술, 사후 관리까지.
+      </p>
+      <span class="program-more">자세히 보기 →</span>
+    </a>
+    <a href="training-startup.html" class="tcard program-card reveal reveal-delay-2" data-tilt>
+      <!-- TODO: 왁싱 창업반 대표 이미지로 교체 -->
+      <div class="program-img">STARTUP</div>
+      <h3 class="program-title">왁싱 창업반</h3>
+      <p class="program-desc">
+        인테리어 · 입지 · 마케팅 · 시술 기술.
+        현장 경험으로 검증된 창업 A to Z.
+      </p>
+      <span class="program-more">자세히 보기 →</span>
+    </a>
+    <a href="training-oneday.html" class="tcard program-card reveal reveal-delay-3" data-tilt>
+      <!-- TODO: One-day 교육 대표 이미지로 교체 -->
+      <div class="program-img">ONE-DAY</div>
+      <h3 class="program-title">One-day 교육</h3>
+      <p class="program-desc">
+        페이스 · 바디 · 브라질리언 실전.
+        하루 만에 기술을 내 것으로.
+      </p>
+      <span class="program-more">자세히 보기 →</span>
+    </a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-tag reveal">Reviews</p>
+  <h2 class="section-title reveal">원장님들의 <em>리얼 후기</em></h2>
+  <p class="section-desc reveal">은아하다와 함께 성장한 원장님들의 이야기</p>
+
+  <div class="review-grid">
+    <div class="tcard reveal reveal-delay-1" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">브로우싱 도입 후 매출 40% 증가. 기존 왁싱 고객들이 자연스럽게 반영구 시술로 넘어와서 객단가가 확 올랐어요.</p>
+      <div class="review-meta">
+        <p class="review-name">김O희 원장</p>
+        <p class="review-shop">서울 강남 · OO뷰티</p>
+      </div>
+    </div>
+    <div class="tcard reveal reveal-delay-2" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">클리어 왁스 쓰고 못 바꿈. 피부 자극이 확실히 덜하고 재시술 요청이 늘어서, 다른 왁스는 이제 생각도 안 나요.</p>
+      <div class="review-meta">
+        <p class="review-name">이O영 원장</p>
+        <p class="review-shop">부산 해운대 · OO왁싱</p>
+      </div>
+    </div>
+    <div class="tcard reveal reveal-delay-3" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">창업 컨설팅으로 오픈 2개월 손익분기. 입지 분석과 마케팅 세팅까지 같이 봐주셔서 시행착오를 엄청 줄였습니다.</p>
+      <div class="review-meta">
+        <p class="review-name">박O진 원장</p>
+        <p class="review-shop">경기 분당 · OO살롱</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PREVIEW -->
+<section id="faq-preview">
+  <p class="section-tag reveal">FAQ</p>
+  <h2 class="section-title reveal">교육 관련 <em>자주 묻는 질문</em></h2>
+  <p class="section-desc reveal">가장 많이 문의 주시는 내용을 모았습니다</p>
+
+  <div class="faq-list">
+    <div class="faq-item reveal reveal-delay-1">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>세미나 일정은 어디서 확인할 수 있나요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>수강료와 교육 기간이 궁금합니다.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-3">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>사후 관리와 추가 교육 지원이 있나요?</div>
+    </div>
+  </div>
+
+  <a href="qna.html#training" class="link-btn reveal">전체 Q&amp;A 보기 →</a>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Get in Touch</p>
+    <h2 class="cta-title reveal">세미나 <em>일정 문의</em></h2>
+    <p class="cta-desc reveal">가까운 지역, 다음 세미나 안내받으세요</p>
+    <div class="reveal">
+      <a href="tel:010-9944-7901" class="cta-btn">전화 상담</a>
+      <a href="#" class="cta-btn-outline">카카오톡 문의</a>
+    </div>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>

@@ -42,13 +42,18 @@
     padding: 40px 30px;
     background: rgba(255,255,255,0.7);
     border: 1px solid rgba(140,180,213,0.12);
-    transition: all 0.4s;
     border-radius: 12px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                background 0.4s ease;
   }
   .philosophy-item:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 50px rgba(140,180,213,0.15);
     background: #fff;
+    box-shadow: 0 24px 60px rgba(140,180,213,0.22),
+                0 0 0 1px rgba(140,180,213,0.3);
   }
   .philosophy-num {
     font-family: 'Cormorant Garamond', serif;
@@ -208,7 +213,7 @@
   <ul class="nav-links">
     <li><a href="about.html" class="active">About</a></li>
     <li class="has-dropdown">
-      <a href="#" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
+      <a href="training.html" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
       <ul class="dropdown-menu">
         <li><a href="training-browxing.html">Browxing 도입반</a></li>
         <li><a href="training-startup.html">왁싱 창업반</a></li>
@@ -216,7 +221,7 @@
       </ul>
     </li>
     <li class="has-dropdown">
-      <a href="#" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
       <ul class="dropdown-menu">
         <li><a href="product-browxing.html">Browxing</a></li>
         <li><a href="product.html">Clear Wax</a></li>
@@ -267,7 +272,7 @@
   <h2 class="section-title reveal">은아하다의 세 가지 약속</h2>
   <p class="section-desc reveal">모든 서비스와 제품에 담긴 핵심 가치</p>
   <div class="philosophy-grid">
-    <div class="philosophy-item reveal reveal-delay-1">
+    <div class="philosophy-item reveal reveal-delay-1" data-tilt>
       <div class="philosophy-num">01</div>
       <h3 class="philosophy-title">Expertise</h3>
       <p class="philosophy-desc">
@@ -275,7 +280,7 @@
         최상의 시술 품질을 보장합니다.
       </p>
     </div>
-    <div class="philosophy-item reveal reveal-delay-2">
+    <div class="philosophy-item reveal reveal-delay-2" data-tilt>
       <div class="philosophy-num">02</div>
       <h3 class="philosophy-title">Trust</h3>
       <p class="philosophy-desc">
@@ -283,7 +288,7 @@
         파트너사가 증명하는 신뢰의 브랜드.
       </p>
     </div>
-    <div class="philosophy-item reveal reveal-delay-3">
+    <div class="philosophy-item reveal reveal-delay-3" data-tilt>
       <div class="philosophy-num">03</div>
       <h3 class="philosophy-title">Innovation</h3>
       <p class="philosophy-desc">
@@ -352,6 +357,12 @@
   <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
 </footer>
 
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('.philosophy-item[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
 <script src="js/common.js"></script>
 </body>
 </html>

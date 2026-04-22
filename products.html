@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== PRODUCTS HUB STYLES ===== */
+
+  /* Shared card base — same tone as training.html */
+  .pcard {
+    padding: 36px 28px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(140,180,213,0.12);
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.5s ease,
+                background 0.4s ease;
+  }
+  .pcard:hover {
+    transform: translateY(-6px);
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(140,180,213,0.22),
+                0 0 0 1px rgba(140,180,213,0.3);
+  }
+
+  /* PRODUCTS SHOWCASE — 2 large side-by-side cards */
+  #products-showcase {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+    text-align: center;
+  }
+  #products-showcase .section-desc { margin: 0 auto 60px; }
+  .showcase-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 50px; max-width: 1100px; margin: 0 auto;
+  }
+  a.showcase-card {
+    text-decoration: none; color: inherit; display: block;
+    padding: 44px 40px; text-align: left;
+  }
+  .showcase-img {
+    /* TODO: 실제 제품 대표 이미지로 교체 */
+    height: 320px;
+    background: linear-gradient(135deg, var(--blue-light), #fff);
+    border: 1px dashed rgba(140,180,213,0.28);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; letter-spacing: 6px;
+    color: var(--blue-dark); opacity: 0.6;
+    border-radius: 10px; margin-bottom: 30px;
+  }
+  .showcase-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .showcase-sub {
+    font-size: 0.82rem; color: var(--blue-dark);
+    letter-spacing: 2px; font-weight: 500;
+    margin-bottom: 18px; text-transform: uppercase;
+  }
+  .showcase-desc {
+    font-size: 0.9rem; color: var(--gray);
+    line-height: 1.8; font-weight: 300; margin-bottom: 26px;
+  }
+  .showcase-more {
+    font-size: 0.78rem; letter-spacing: 2px;
+    color: var(--blue-dark); font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  /* REVIEWS */
+  #reviews { text-align: center; }
+  #reviews .section-desc { margin: 0 auto 60px; }
+  .review-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; max-width: 1100px; margin: 0 auto;
+    text-align: left;
+  }
+  .review-stars {
+    color: #E6B84F; letter-spacing: 2px;
+    font-size: 0.9rem; margin-bottom: 18px;
+  }
+  .review-body {
+    font-size: 0.92rem; color: var(--black);
+    line-height: 1.8; font-weight: 400;
+    margin-bottom: 26px; min-height: 90px;
+  }
+  .review-meta {
+    border-top: 1px solid rgba(140,180,213,0.2);
+    padding-top: 16px;
+  }
+  .review-name {
+    font-size: 0.88rem; letter-spacing: 1.5px;
+    color: var(--blue-dark); font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .review-shop {
+    font-size: 0.76rem; color: var(--gray);
+    letter-spacing: 1px; font-weight: 300;
+  }
+
+  /* FAQ PREVIEW */
+  #faq-preview {
+    background: linear-gradient(180deg, #F4F7FA 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  #faq-preview .section-desc { margin: 0 auto 50px; }
+  .faq-list {
+    max-width: 780px; margin: 0 auto 44px;
+    text-align: left;
+  }
+  .faq-item {
+    padding: 26px 28px;
+    border: 1px solid rgba(140,180,213,0.15);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.7);
+    transition: all 0.3s ease;
+  }
+  .faq-item:hover {
+    border-color: rgba(140,180,213,0.35);
+    background: #fff;
+    transform: translateX(4px);
+  }
+  .faq-q {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 0.95rem; font-weight: 400;
+    color: var(--black);
+  }
+  .faq-q-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--blue);
+    font-weight: 300; flex-shrink: 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .showcase-grid { grid-template-columns: 1fr; max-width: 440px; gap: 30px; }
+    .showcase-img { height: 240px; }
+    .review-grid { grid-template-columns: 1fr; max-width: 420px; }
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+  .dropdown-menu a.active { color: var(--blue); }
+
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* Outline CTA variant */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px; margin-left: 12px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  @media (max-width: 600px) {
+    .cta-btn-outline { margin-left: 0; margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle active">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
+  </ul>
+  <a href="manager.html" class="nav-manager">Manager</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Our Products</p>
+    <h1 class="page-hero-title">현장에서 만든 <em>프로의 제품</em></h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">원장님이 매일 쓰는 제품, 원장님이 직접 만들었습니다</p>
+  </div>
+</section>
+
+<!-- PRODUCTS SHOWCASE -->
+<section id="products-showcase">
+  <p class="section-tag reveal">Products</p>
+  <h2 class="section-title reveal">은아하다의 <em>두 가지</em> 제품</h2>
+  <p class="section-desc reveal">현장에서 검증된 시술 도구와 재료</p>
+
+  <div class="showcase-grid">
+    <a href="product-browxing.html" class="pcard showcase-card reveal reveal-delay-1" data-tilt>
+      <!-- TODO: Browxing 머신 대표 이미지로 교체 -->
+      <div class="showcase-img">BROWXING MACHINE</div>
+      <h3 class="showcase-title">Browxing Machine</h3>
+      <p class="showcase-sub">반영구 눈썹 시술 머신</p>
+      <p class="showcase-desc">
+        반영구 눈썹의 새로운 기준.
+        시술 시간 단축 + 자연스러운 결 + 고객 만족도.
+      </p>
+      <span class="showcase-more">자세히 보기 →</span>
+    </a>
+    <a href="product.html" class="pcard showcase-card reveal reveal-delay-2" data-tilt>
+      <!-- TODO: Clear Wax 제품 대표 이미지로 교체 -->
+      <div class="showcase-img">CLEAR WAX</div>
+      <h3 class="showcase-title">Clear Wax</h3>
+      <p class="showcase-sub">프로페셔널 왁싱 왁스</p>
+      <p class="showcase-desc">
+        현장에서 8년간 만족하지 못해 직접 만든 왁스.
+        전국 원장님이 월 200kg 소비 중.
+      </p>
+      <span class="showcase-more">자세히 보기 →</span>
+    </a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-tag reveal">Reviews</p>
+  <h2 class="section-title reveal">원장님들의 <em>리얼 후기</em></h2>
+  <p class="section-desc reveal">제품을 직접 써본 원장님들의 이야기</p>
+
+  <div class="review-grid">
+    <div class="pcard reveal reveal-delay-1" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">클리어 왁스 한 번 써보면 다른 왁스 못 써요. 발림성과 제거력이 차원이 달라서 시술 속도까지 빨라졌습니다.</p>
+      <div class="review-meta">
+        <p class="review-name">이O영 원장</p>
+        <p class="review-shop">부산 해운대 · OO왁싱</p>
+      </div>
+    </div>
+    <div class="pcard reveal reveal-delay-2" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">브로우싱 도입 후 객단가 50% 상승. 기존 고객이 반영구까지 이어가면서 샵 매출이 완전히 다른 레벨로 올라갔어요.</p>
+      <div class="review-meta">
+        <p class="review-name">김O희 원장</p>
+        <p class="review-shop">서울 강남 · OO뷰티</p>
+      </div>
+    </div>
+    <div class="pcard reveal reveal-delay-3" data-tilt>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">왁스 재구매율 100%. 한 번 쓰기 시작한 원장님들 전부 그대로 쓰십니다. 품질이 일정해서 믿고 발주 넣어요.</p>
+      <div class="review-meta">
+        <p class="review-name">박O진 원장</p>
+        <p class="review-shop">경기 분당 · OO살롱</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PREVIEW -->
+<section id="faq-preview">
+  <p class="section-tag reveal">FAQ</p>
+  <h2 class="section-title reveal">제품 관련 <em>자주 묻는 질문</em></h2>
+  <p class="section-desc reveal">가장 많이 문의 주시는 내용을 모았습니다</p>
+
+  <div class="faq-list">
+    <div class="faq-item reveal reveal-delay-1">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>클리어 왁스 주문은 어떻게 하나요?</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>브로우싱 머신 도입 절차가 궁금합니다.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-3">
+      <div class="faq-q"><span class="faq-q-mark">Q.</span>처음인데 샘플 받을 수 있나요?</div>
+    </div>
+  </div>
+
+  <a href="qna.html#product" class="link-btn reveal">전체 Q&amp;A 보기 →</a>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Get in Touch</p>
+    <h2 class="cta-title reveal">도매 <em>문의</em></h2>
+    <p class="cta-desc reveal">수량 · 배송 · 결제 방식 안내</p>
+    <div class="reveal">
+      <a href="tel:010-9944-7901" class="cta-btn">전화 문의</a>
+      <a href="#" class="cta-btn-outline">카카오톡 문의</a>
+    </div>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>
