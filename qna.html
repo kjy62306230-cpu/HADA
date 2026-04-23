@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q&amp;A — 은아하다</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== QNA PAGE STYLES ===== */
+
+  /* Hero — hub-level page (no breadcrumb) */
+  .page-hero {
+    height: 50vh; min-height: 420px;
+    padding: 80px 60px 0;
+  }
+  @media (max-width: 900px) {
+    .page-hero { height: auto; min-height: 320px; padding: 100px 24px 40px; }
+  }
+
+  /* Hero typography swap — Q&A 페이지 전용 */
+  .page-hero .page-hero-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    letter-spacing: 8px;
+    color: var(--blue);
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 24px;
+    text-transform: none;
+  }
+  .page-hero .page-hero-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: var(--gray);
+    font-weight: 300;
+    font-style: normal;
+    margin-bottom: 20px;
+  }
+  .page-hero .page-hero-title em {
+    font-style: normal;
+    color: var(--black);
+    font-weight: 400;
+  }
+  .page-hero .page-hero-line { display: none; }
+  .page-hero .page-hero-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .page-hero .page-hero-tag {
+      font-size: 2rem !important;
+      letter-spacing: 5px;
+    }
+    .page-hero .page-hero-title {
+      font-size: 1rem !important;
+      letter-spacing: 2px;
+    }
+  }
+
+  /* ===== STICKY CATEGORY NAV ===== */
+  #category-nav {
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(140, 180, 213, 0.15);
+    padding: 16px 60px !important;
+    text-align: center;
+  }
+  .cat-nav-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .cat-nav-btn {
+    padding: 8px 18px;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    color: var(--gray);
+    border: 1px solid rgba(140, 180, 213, 0.25);
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .cat-nav-btn:hover {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(140, 180, 213, 0.3);
+  }
+  @media (max-width: 900px) {
+    #category-nav {
+      top: 56px;
+      padding: 12px 16px !important;
+    }
+    .cat-nav-btn {
+      padding: 6px 14px;
+      font-size: 0.76rem;
+    }
+  }
+
+  /* ===== QA SECTIONS ===== */
+  .qa-section {
+    scroll-margin-top: 140px;
+    text-align: center;
+  }
+  #browxing, #oneday, #partnership {
+    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+  }
+  .qa-list {
+    max-width: 900px;
+    margin: 50px auto 0;
+    text-align: left;
+  }
+  .qa-item {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(140, 180, 213, 0.15);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .qa-item:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 30px rgba(140, 180, 213, 0.1);
+  }
+  .qa-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 28px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--black);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: all 0.3s;
+  }
+  .qa-question:hover {
+    color: var(--blue);
+  }
+  .qa-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(140, 180, 213, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s;
+    margin-left: 16px;
+  }
+  .qa-item.qa-open .qa-icon {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+  .qa-icon::before {
+    content: '▾';
+    font-size: 0.9rem;
+    color: var(--blue);
+    transition: transform 0.3s, color 0.3s;
+    display: inline-block;
+    line-height: 1;
+  }
+  .qa-item.qa-open .qa-icon::before {
+    color: #fff;
+    transform: rotate(180deg);
+  }
+  .qa-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .qa-answer-inner {
+    padding: 20px 28px 24px 28px;
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.9;
+    font-weight: 300;
+    border-top: 1px solid rgba(140, 180, 213, 0.08);
+  }
+  .qa-item.qa-open .qa-answer {
+    max-height: 800px;
+  }
+
+  @media (max-width: 900px) {
+    .qa-question {
+      padding: 18px 20px;
+      font-size: 0.88rem;
+    }
+    .qa-answer-inner {
+      padding: 18px 20px 20px 20px;
+      font-size: 0.82rem;
+    }
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+  .dropdown-menu a.active { color: var(--blue); }
+
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
+  }
+
+  /* Outline CTA variant */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px; margin-left: 12px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  @media (max-width: 600px) {
+    .cta-btn-outline { margin-left: 0; margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html" class="active">Q&amp;A</a></li>
+    <li><a href="manager.html" class="mobile-manager">Manager</a></li>
+  </ul>
+  <a href="manager.html" class="nav-manager">Manager</a>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-hero-tag">Q&amp;A</p>
+    <h1 class="page-hero-title">자주 <em>묻는 질문</em></h1>
+    <div class="page-hero-line"></div>
+    <p class="page-hero-desc">은아하다를 처음 만나는 원장님들께서 궁금해하시는 것들</p>
+  </div>
+</section>
+
+<!-- CATEGORY NAV -->
+<section id="category-nav">
+  <div class="cat-nav-wrap">
+    <a href="#training" class="cat-nav-btn">교육 일반</a>
+    <a href="#browxing" class="cat-nav-btn">브로우싱</a>
+    <a href="#startup" class="cat-nav-btn">창업반</a>
+    <a href="#oneday" class="cat-nav-btn">원데이</a>
+    <a href="#product" class="cat-nav-btn">제품</a>
+    <a href="#partnership" class="cat-nav-btn">파트너십</a>
+  </div>
+</section>
+
+<!-- ===== TRAINING Q&A ===== -->
+<section id="training" class="qa-section">
+  <p class="section-tag reveal">Training</p>
+  <h2 class="section-title reveal">교육 <em>일반</em></h2>
+  <p class="section-desc reveal" style="margin: 0 auto;">은아하다 교육 과정에 대해 자주 묻는 질문</p>
+
+  <div class="qa-list">
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>세미나 일정은 어디서 확인할 수 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">카카오톡 채널(@은아하다) 또는 홈페이지 문의 양식으로 최신 일정을 안내해드립니다. 매월 정기 세미나와 지역별 찾아가는 교육을 함께 운영하고 있으니 편하신 방법으로 문의 주세요.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>수강료와 교육 기간이 궁금합니다.</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">과정별로 다르며, 각 교육 페이지에서 상세 확인이 가능합니다. 세미나 1:1 상담 시 원장님의 목표와 현재 상황에 맞는 맞춤 커리큘럼으로 안내드리고 있습니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>수강 인원 제한이 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">소수 정예로 운영합니다. 브로우싱 도입반은 최대 6명, 왁싱 창업반은 1:1~소그룹 운영을 원칙으로 합니다. 충분한 실습과 피드백을 위해 인원을 제한하고 있습니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>사후 관리와 추가 교육 지원이 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">수강 후 카카오톡 Q&amp;A 지원이 상시 제공되며, 정기적으로 진행되는 스킬업 세미나에 우선 초대해드립니다. 현장에서 발생하는 실제 케이스에 대한 답변이 가장 큰 가치라고 믿습니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>왁싱 경력이 없어도 수강 가능한가요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">가능합니다. 초보자 대상 원데이 교육부터 실전 창업반까지 단계별 과정을 운영하고 있습니다. 현재 경력에 따라 가장 적합한 과정을 상담으로 안내해드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>수강 후 자격증이 발급되나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">은아하다 수료증이 발급됩니다. 국가 공식 자격증은 아닌 이수 증명 문서로, 원장님의 전문성을 증명하는 자료로 활용하실 수 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BROWXING Q&A ===== -->
+<section id="browxing" class="qa-section">
+  <p class="section-tag reveal">Browxing</p>
+  <h2 class="section-title reveal">브로우싱 <em>도입반</em></h2>
+  <p class="section-desc reveal" style="margin: 0 auto;">브로우싱 교육과 머신 도입에 대한 질문</p>
+
+  <div class="qa-list">
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>반영구 경험이 없어도 수강 가능한가요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">네, 가능합니다. 브로우싱은 바늘을 피부에 깊이 주입하는 방식이 아니기에 반영구 경력 없이도 충분히 익힐 수 있습니다. 실제로 수강생의 상당수가 반영구 비경력자입니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>머신 가격과 도입 절차가 궁금합니다.</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">교육 과정에 머신 구입이 포함되어 있어 별도로 구매하실 필요가 없습니다. 정확한 가격과 구성은 상담 시 안내드리며, 분납 및 파트너십 조건도 함께 논의 가능합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>수강 후 AS는 어떻게 받나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">머신 관련 AS는 본사에서 직접 처리합니다. 시술 중 궁금한 점은 카카오톡 Q&amp;A로 빠르게 답변드리고 있으며, 필요 시 현장 방문 컨설팅도 가능합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>시술 시간은 얼마나 걸리나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">1회 시술 기준 약 40~60분입니다. 반영구보다 짧은 시간에 자연스러운 결과를 만들 수 있다는 점이 가장 큰 장점이며, 회전율이 높아 매출 측면에서 유리합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>기존 반영구 타투와 차이점은 무엇인가요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">브로우싱은 피부 표면에 가까운 레이어에 작업하기 때문에 자연스럽고 부드러운 표현이 가능합니다. 통증이 적고 회복 기간이 짧으며, 결과물도 훨씬 자연스러워 최근 트렌드에 잘 맞습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STARTUP Q&A ===== -->
+<section id="startup" class="qa-section">
+  <p class="section-tag reveal">Startup</p>
+  <h2 class="section-title reveal">왁싱 <em>창업반</em></h2>
+  <p class="section-desc reveal" style="margin: 0 auto;">왁싱샵 창업 준비 원장님들의 질문</p>
+
+  <div class="qa-list">
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>왁싱 경력이 없어도 창업할 수 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">가능합니다. 창업반은 기술 습득부터 매장 운영, 고객 응대까지 전 과정을 다룹니다. 경력이 없는 분은 충분한 실습을 통해 자신감을 얻을 수 있도록 집중 지도해드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>초기 창업 비용은 얼마나 필요한가요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">매장 규모와 지역에 따라 편차가 큽니다. 평균적으로 1인 원룸형 매장 기준의 예산을 상담 시 안내드리며, 비용을 낮추는 운영 전략도 함께 논의합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>오픈 후 사후 관리는 어떻게 되나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">오픈 후 3개월 집중 케어 기간이 있습니다. 현장 방문, 운영 자문, 제품 공급 전면 지원이 포함되며 이후에도 카카오톡 상시 문의가 가능합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>인테리어와 입지 컨설팅도 포함되나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">네, 포함됩니다. 입지 선정 팁과 인테리어 방향성, 매장 컨셉 구성까지 함께 논의합니다. 필요 시 인테리어 업체 연결도 가능합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>창업 전 실습 시간이 얼마나 되나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">기술 습득 단계부터 모델 실습, 모의 매장 운영까지 충분한 실습 시간을 확보합니다. 수강 기간 중 실제 고객 시술에 가까운 환경에서 훈련받을 수 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ONEDAY Q&A ===== -->
+<section id="oneday" class="qa-section">
+  <p class="section-tag reveal">One-day</p>
+  <h2 class="section-title reveal">원데이 <em>교육</em></h2>
+  <p class="section-desc reveal" style="margin: 0 auto;">단기 원데이 과정에 대한 질문</p>
+
+  <div class="qa-list">
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>왁싱 초보도 수강할 수 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">네, 초보자 대상으로 설계된 과정입니다. 이론부터 실습까지 하루 안에 핵심만 집중적으로 학습할 수 있도록 구성되어 있습니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>세 과정을 모두 수강하면 할인이 되나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">네, 패키지 할인이 적용됩니다. 세 과정을 함께 수강하시는 경우 개별 수강 대비 상당한 금액을 할인해드리며, 상담 시 정확한 조건을 안내드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>온라인 강의 수강 기간 제한이 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">온라인 보조 자료는 수강 시작일로부터 6개월간 열람 가능합니다. 현장 실습 중 복습이 필요하실 때 활용하실 수 있도록 설계했습니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>실습 모델은 직접 데려가야 하나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">본사에서 모델을 준비해드립니다. 원하시는 경우 지인 모델을 동반하실 수도 있으며, 사전에 안내 주시면 맞춤 일정으로 조정해드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>모든 과정을 하루에 끝낼 수 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">각 과정은 하루에 완결되도록 설계되어 있습니다. 다만 세 과정을 하루에 몰아 듣는 것은 체력적으로 권장드리지 않으며, 일정을 나눠 수강하시기를 추천합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT Q&A ===== -->
+<section id="product" class="qa-section">
+  <p class="section-tag reveal">Product</p>
+  <h2 class="section-title reveal"><em>제품</em> 관련</h2>
+  <p class="section-desc reveal" style="margin: 0 auto;">클리어 왁스와 브로우싱 머신 도입 관련 질문</p>
+
+  <div class="qa-list">
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>클리어 왁스 주문은 어떻게 하나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">공식 홈페이지 상담 양식 또는 카카오톡 채널(@은아하다)로 주문 가능합니다. 도매 계정이 있는 원장님은 별도의 도매가로 안내드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>브로우싱 머신 도입 절차가 궁금합니다.</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">상담 → 교육 신청 → 머신 수령 → 현장 셋업 순서로 진행됩니다. 교육 과정에 머신이 포함되어 있어 별도의 구매 절차는 필요 없습니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>처음인데 샘플을 받을 수 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">샘플 제공이 가능합니다. 매장 규모와 시술 예상량을 알려주시면 맞춤 샘플을 보내드립니다. 본격 도입 전 테스트하실 수 있도록 안내드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>도매가 최소 주문 수량이 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">최소 주문 수량이 적용됩니다. 정확한 수량과 조건은 도매 계약 시 안내드리며, 소량 필요 시 소매가로도 구매 가능합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>배송은 얼마나 걸리나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">주문 확인 후 영업일 기준 1~2일 내 출고됩니다. 도서 산간 지역이나 대량 주문의 경우 일정을 별도로 안내드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>제품 사용 중 문제가 생기면 어떻게 하나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">카카오톡 채널로 바로 문의 주세요. 제품 관련 이슈는 본사에서 직접 확인 후 교환·환불·기술 지원을 안내드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTNERSHIP Q&A ===== -->
+<section id="partnership" class="qa-section">
+  <p class="section-tag reveal">Partnership</p>
+  <h2 class="section-title reveal">파트너십 <em>문의</em></h2>
+  <p class="section-desc reveal" style="margin: 0 auto;">세미나 파트너 · 지사 파트너 관련 질문</p>
+
+  <div class="qa-list">
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>파트너 가입 비용이 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">별도의 가입 비용은 없습니다. 다만 파트너 모델에 따라 초기 교육비·제품 셋업비 등이 적용될 수 있으며, 상담 시 명확히 안내드립니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>지역 중복은 어떻게 관리하나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">지사 파트너는 지역 독점이 원칙입니다. 이미 파트너가 있는 지역은 중복 선정하지 않으며, 신청 순서와 지역 특성을 종합적으로 고려해 협의합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>파트너 해지 조건이 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">계약서에 명시된 조건에 따라 해지 가능합니다. 일반적으로 양측 서면 합의 또는 중대한 계약 위반 시 해지가 이루어지며, 세부 조건은 계약 단계에서 투명하게 공유합니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>세미나 파트너와 지사를 중복 운영할 수 있나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">네, 두 모델을 함께 운영하시는 파트너도 많습니다. 세미나에서 발생한 머신 수요가 제품 유통으로 이어지고, 유통이 다시 세미나 리드로 환원되는 선순환 구조입니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>파트너 교육은 어떻게 받나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">계약 체결 후 본사에서 파트너 전용 교육을 진행합니다. 운영 가이드, 세일즈 자료, 시술·상담 스크립트까지 실전에 바로 쓸 수 있는 형태로 제공됩니다.</div>
+      </div>
+    </div>
+    <div class="qa-item reveal">
+      <button class="qa-question">
+        <span>수익 분배는 어떻게 되나요?</span>
+        <span class="qa-icon"></span>
+      </button>
+      <div class="qa-answer">
+        <div class="qa-answer-inner">파트너 모델과 지역·규모에 따라 상이합니다. 세미나 파트너는 세미나 수익과 머신 도입 수수료가, 지사 파트너는 도매가 기반 유통 마진이 적용되며 자세한 조건은 1:1 상담에서 안내드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="contact" class="cta-section">
+  <div class="cta-content">
+    <p class="section-tag reveal">Still curious?</p>
+    <h2 class="cta-title reveal">다른 <em>질문</em>이 있으신가요?</h2>
+    <p class="cta-desc reveal">1:1 맞춤 답변을 드립니다</p>
+    <div class="reveal">
+      <a href="tel:010-9944-7901" class="cta-btn">전화 문의</a>
+      <a href="#" class="cta-btn-outline">카카오톡 문의</a>
+    </div>
+    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
+</footer>
+
+<script>
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
+</script>
+<script>
+  // Q&A accordion toggle
+  (function() {
+    document.querySelectorAll('.qa-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.qa-item');
+        item.classList.toggle('qa-open');
+      });
+    });
+  })();
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>
