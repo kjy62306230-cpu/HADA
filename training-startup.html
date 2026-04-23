@@ -21,6 +21,26 @@
       min-height: 320px;
       padding: 40px 24px 40px;
     }
+    .page-hero-title {
+      font-size: 1.8rem !important;
+      line-height: 1.3;
+      letter-spacing: 2px;
+    }
+    .page-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+    }
+    .page-hero-desc {
+      font-size: 0.85rem;
+      padding: 0 10px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      line-height: 1.3;
+    }
+    .section-desc {
+      font-size: 0.85rem;
+    }
   }
 
   /* Breadcrumb */
@@ -250,6 +270,40 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem; color: var(--blue);
     font-weight: 300; flex-shrink: 0;
+  }
+
+  /* FAQ anchor + arrow styles (added later) */
+  .faq-item,
+  a.faq-item,
+  .faq-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .faq-item:hover,
+  .faq-item-link:hover {
+    transform: translateX(8px);
+    color: var(--blue);
+  }
+  .faq-item:hover .faq-q,
+  .faq-item-link:hover .faq-q { color: var(--blue); }
+  .faq-arrow {
+    flex-shrink: 0;
+    color: var(--blue);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s;
+  }
+  .faq-item:hover .faq-arrow,
+  .faq-item-link:hover .faq-arrow {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   /* ===== RESPONSIVE ===== */
@@ -544,15 +598,18 @@
   <h2 class="section-title reveal">창업 <em>자주 묻는 질문</em></h2>
 
   <div class="faq-list">
-    <div class="faq-item reveal reveal-delay-1">
+    <a href="qna.html#startup" class="faq-item reveal reveal-delay-1">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>왁싱 경력이 없어도 창업할 수 있나요?</div>
-    </div>
-    <div class="faq-item reveal reveal-delay-2">
+      <span class="faq-arrow">→</span>
+    </a>
+    <a href="qna.html#startup" class="faq-item reveal reveal-delay-2">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>초기 창업 비용은 얼마나 필요한가요?</div>
-    </div>
-    <div class="faq-item reveal reveal-delay-3">
+      <span class="faq-arrow">→</span>
+    </a>
+    <a href="qna.html#startup" class="faq-item reveal reveal-delay-3">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>오픈 후 사후 관리는 어떻게 되나요?</div>
-    </div>
+      <span class="faq-arrow">→</span>
+    </a>
   </div>
 
   <a href="qna.html#startup" class="link-btn reveal">전체 Q&amp;A 보기 →</a>

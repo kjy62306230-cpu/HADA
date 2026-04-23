@@ -8,6 +8,12 @@
 <style>
   /* ===== HOME-ONLY STYLES ===== */
 
+  /* Mobile-only line break utility */
+  .mo-only { display: none; }
+  @media (max-width: 900px) {
+    .mo-only { display: inline; }
+  }
+
   /* HERO */
   #hero {
     position: relative; height: 100vh; display: flex;
@@ -473,7 +479,7 @@
 <!-- ===== OUR TRAINING (was PRODUCTS PREVIEW) ===== -->
 <section id="products-preview">
   <p class="section-tag reveal">Our Training</p>
-  <h2 class="section-title reveal">현장에서 <em>함께 배우는</em> 은아하다</h2>
+  <h2 class="section-title reveal">현장에서 <em>함께 배우는</em><br class="mo-only"> 은아하다</h2>
   <p class="section-desc reveal">세미나, 교육, 파트너샵까지 — 전국 원장님들과 함께 성장합니다</p>
   <div class="product-showcase">
     <a href="training-browxing.html" class="product-card reveal reveal-delay-1">

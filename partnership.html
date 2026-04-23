@@ -8,6 +8,12 @@
 <style>
   /* ===== PARTNERSHIP PAGE STYLES ===== */
 
+  /* Mobile-only line break utility */
+  .mo-only { display: none; }
+  @media (max-width: 900px) {
+    .mo-only { display: inline; }
+  }
+
   /* Hero — hub-level page (no breadcrumb) */
   .page-hero {
     height: 50vh; min-height: 420px;
@@ -15,6 +21,26 @@
   }
   @media (max-width: 900px) {
     .page-hero { height: auto; min-height: 320px; padding: 100px 24px 40px; }
+    .page-hero-title {
+      font-size: 1.8rem !important;
+      line-height: 1.3;
+      letter-spacing: 2px;
+    }
+    .page-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+    }
+    .page-hero-desc {
+      font-size: 0.85rem;
+      padding: 0 10px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      line-height: 1.3;
+    }
+    .section-desc {
+      font-size: 0.85rem;
+    }
   }
 
   /* Shared tilt-card base — same tone as products.html .pcard */
@@ -416,6 +442,40 @@
     font-weight: 300; flex-shrink: 0;
   }
 
+  /* FAQ anchor + arrow styles (added later) */
+  .faq-item,
+  a.faq-item,
+  .faq-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .faq-item:hover,
+  .faq-item-link:hover {
+    transform: translateX(8px);
+    color: var(--blue);
+  }
+  .faq-item:hover .faq-q,
+  .faq-item-link:hover .faq-q { color: var(--blue); }
+  .faq-arrow {
+    flex-shrink: 0;
+    color: var(--blue);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s;
+  }
+  .faq-item:hover .faq-arrow,
+  .faq-item-link:hover .faq-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   /* ===== NAV DROPDOWN (shared pattern) ===== */
   .nav-links .has-dropdown { position: relative; }
   .nav-links .dropdown-toggle {
@@ -550,7 +610,7 @@
 <section class="page-hero">
   <div class="page-hero-content">
     <p class="page-hero-tag">Partnership</p>
-    <h1 class="page-hero-title">함께 <em>성장</em>하는 파트너</h1>
+    <h1 class="page-hero-title">함께 <em>성장</em>하는<br class="mo-only"> 파트너</h1>
     <div class="page-hero-line"></div>
     <p class="page-hero-desc">은아하다와 함께 시장을 만들어가세요</p>
   </div>
@@ -559,7 +619,7 @@
 <!-- WHY NOW -->
 <section id="why-now">
   <p class="section-tag reveal">Why Now</p>
-  <h2 class="section-title reveal">2025, 고객이 원하는 건 <em>자연스러움</em></h2>
+  <h2 class="section-title reveal">고객이 원하는 건<br class="mo-only"> <em>자연스러움</em></h2>
   <p class="section-desc reveal">우리는 방향성을 고민해야 할 때</p>
 
   <div class="why-now-intro reveal">
@@ -605,7 +665,7 @@
 <!-- PARTNER TYPES -->
 <section id="partner-types">
   <p class="section-tag reveal" style="text-align:center;">Two Models</p>
-  <h2 class="section-title reveal" style="text-align:center;">은아하다의 <em>두 가지 파트너십</em></h2>
+  <h2 class="section-title reveal" style="text-align:center;">은아하다의<br class="mo-only"> <em>두 가지 파트너십</em></h2>
   <p class="section-desc reveal" style="text-align:center; margin: 0 auto 60px;">원장님의 방향에 맞는 모델을 선택하세요</p>
 
   <div class="types-grid">
@@ -667,7 +727,7 @@
 <!-- BENEFITS -->
 <section id="benefits">
   <p class="section-tag reveal">Benefits</p>
-  <h2 class="section-title reveal">은아하다 <em>파트너의 혜택</em></h2>
+  <h2 class="section-title reveal">은아하다<br class="mo-only"> <em>파트너의 혜택</em></h2>
   <p class="section-desc reveal">파트너에게만 제공되는 가치</p>
 
   <div class="benefits-grid">
@@ -756,15 +816,18 @@
   <p class="section-desc reveal">가장 많이 문의 주시는 내용을 모았습니다</p>
 
   <div class="faq-list">
-    <div class="faq-item reveal reveal-delay-1">
+    <a href="qna.html#partnership" class="faq-item reveal reveal-delay-1">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>파트너 가입 비용이 있나요?</div>
-    </div>
-    <div class="faq-item reveal reveal-delay-2">
+      <span class="faq-arrow">→</span>
+    </a>
+    <a href="qna.html#partnership" class="faq-item reveal reveal-delay-2">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>지역 중복은 어떻게 관리하나요?</div>
-    </div>
-    <div class="faq-item reveal reveal-delay-3">
+      <span class="faq-arrow">→</span>
+    </a>
+    <a href="qna.html#partnership" class="faq-item reveal reveal-delay-3">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>파트너 해지 조건이 있나요?</div>
-    </div>
+      <span class="faq-arrow">→</span>
+    </a>
   </div>
 
   <a href="qna.html#partnership" class="link-btn reveal">전체 Q&amp;A 보기 →</a>

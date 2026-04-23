@@ -8,6 +8,12 @@
 <style>
   /* ===== WAXING PAGE STYLES ===== */
 
+  /* Mobile-only line break utility */
+  .mo-only { display: none; }
+  @media (max-width: 900px) {
+    .mo-only { display: inline; }
+  }
+
   /* INTRO */
   #wax-intro {
     text-align: center;
@@ -157,7 +163,7 @@
 <!-- INTRO -->
 <section id="wax-intro">
   <p class="section-tag reveal">Our Services</p>
-  <h2 class="section-title reveal">은아하다만의 프리미엄 왁싱</h2>
+  <h2 class="section-title reveal">은아하다만의<br class="mo-only"> 프리미엄 왁싱</h2>
   <p class="section-desc reveal">
     8년 이상의 전문 경력, 엄선된 왁스 원료, 그리고 고객 맞춤 시술.
     은아하다에서는 시술 전 충분한 상담을 통해 피부 타입에 맞는 최적의 방법을 제안합니다.

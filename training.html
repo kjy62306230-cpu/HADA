@@ -8,6 +8,12 @@
 <style>
   /* ===== TRAINING PAGE STYLES ===== */
 
+  /* Mobile-only line break utility */
+  .mo-only { display: none; }
+  @media (max-width: 900px) {
+    .mo-only { display: inline; }
+  }
+
   /* Hero — top padding ensures fixed nav (~84px) never overlaps content.
      display: flex; align-items: center is inherited from style.css. */
   .page-hero {
@@ -20,6 +26,26 @@
       height: auto;
       min-height: 320px;
       padding: 100px 24px 40px;
+    }
+    .page-hero-title {
+      font-size: 1.8rem !important;
+      line-height: 1.3;
+      letter-spacing: 2px;
+    }
+    .page-hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+    }
+    .page-hero-desc {
+      font-size: 0.85rem;
+      padding: 0 10px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      line-height: 1.3;
+    }
+    .section-desc {
+      font-size: 0.85rem;
     }
   }
 
@@ -179,6 +205,40 @@
     font-weight: 300; flex-shrink: 0;
   }
 
+  /* FAQ anchor + arrow styles (added later) */
+  .faq-item,
+  a.faq-item,
+  .faq-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .faq-item:hover,
+  .faq-item-link:hover {
+    transform: translateX(8px);
+    color: var(--blue);
+  }
+  .faq-item:hover .faq-q,
+  .faq-item-link:hover .faq-q { color: var(--blue); }
+  .faq-arrow {
+    flex-shrink: 0;
+    color: var(--blue);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s;
+  }
+  .faq-item:hover .faq-arrow,
+  .faq-item-link:hover .faq-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .region-grid,
@@ -321,7 +381,7 @@
 <section class="page-hero">
   <div class="page-hero-content">
     <p class="page-hero-tag">Training &amp; Education</p>
-    <h1 class="page-hero-title">전국 원장님들과 <em>함께</em> 성장합니다</h1>
+    <h1 class="page-hero-title">전국 원장님들과<br class="mo-only"> <em>함께</em> 성장합니다</h1>
     <div class="page-hero-line"></div>
     <p class="page-hero-desc">브로우싱 도입부터 왁싱 창업까지</p>
   </div>
@@ -370,7 +430,7 @@
 <!-- MAP / NETWORK -->
 <section id="map-section">
   <p class="section-tag reveal">Our Network</p>
-  <h2 class="section-title reveal">전국의 <em>은아하다 파트너샵</em></h2>
+  <h2 class="section-title reveal">전국의<br class="mo-only"> <em>은아하다 파트너샵</em></h2>
   <p class="section-desc reveal">100곳 이상의 원장님들이 은아하다와 함께하고 있습니다</p>
 
   <!-- TODO: 실제 네이버 지도 API 연동 예정 -->
@@ -445,15 +505,18 @@
   <p class="section-desc reveal">가장 많이 문의 주시는 내용을 모았습니다</p>
 
   <div class="faq-list">
-    <div class="faq-item reveal reveal-delay-1">
+    <a href="qna.html#training" class="faq-item reveal reveal-delay-1">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>세미나 일정은 어디서 확인할 수 있나요?</div>
-    </div>
-    <div class="faq-item reveal reveal-delay-2">
+      <span class="faq-arrow">→</span>
+    </a>
+    <a href="qna.html#training" class="faq-item reveal reveal-delay-2">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>수강료와 교육 기간이 궁금합니다.</div>
-    </div>
-    <div class="faq-item reveal reveal-delay-3">
+      <span class="faq-arrow">→</span>
+    </a>
+    <a href="qna.html#training" class="faq-item reveal reveal-delay-3">
       <div class="faq-q"><span class="faq-q-mark">Q.</span>사후 관리와 추가 교육 지원이 있나요?</div>
-    </div>
+      <span class="faq-arrow">→</span>
+    </a>
   </div>
 
   <a href="qna.html#training" class="link-btn reveal">전체 Q&amp;A 보기 →</a>
