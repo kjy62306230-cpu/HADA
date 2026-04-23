@@ -44,42 +44,46 @@ document.querySelectorAll('[data-product-tilt]').forEach(inner => {
 });
 
 
-// Custom cursor
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let cx = 0, cy = 0, dx = 0, dy = 0;
-document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
-function animCursor() {
-  dx += (cx - dx) * 0.15;
-  dy += (cy - dy) * 0.15;
-  if (dot) { dot.style.left = cx - 4 + 'px'; dot.style.top = cy - 4 + 'px'; }
-  if (ring) {
-    const rSize = ring.classList.contains('hover') ? 25 : 18;
-    ring.style.left = dx - rSize + 'px'; ring.style.top = dy - rSize + 'px';
+// Desktop-only: custom cursor + mouse-tracked gradient
+// Skip entirely on touch devices (no hover capability)
+if (window.matchMedia('(hover: hover)').matches) {
+  // Custom cursor
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let cx = 0, cy = 0, dx = 0, dy = 0;
+  document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
+  function animCursor() {
+    dx += (cx - dx) * 0.15;
+    dy += (cy - dy) * 0.15;
+    if (dot) { dot.style.left = cx - 4 + 'px'; dot.style.top = cy - 4 + 'px'; }
+    if (ring) {
+      const rSize = ring.classList.contains('hover') ? 25 : 18;
+      ring.style.left = dx - rSize + 'px'; ring.style.top = dy - rSize + 'px';
+    }
+    requestAnimationFrame(animCursor);
   }
-  requestAnimationFrame(animCursor);
+  animCursor();
+
+  // Cursor hover effects — class toggle for smooth CSS transition
+  document.querySelectorAll('a, [data-tilt], .product-card, button, .cta-btn, .nav-cta, .link-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      if (dot) dot.classList.add('hover');
+      if (ring) ring.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      if (dot) dot.classList.remove('hover');
+      if (ring) ring.classList.remove('hover');
+    });
+  });
+
+  // =====================================================
+  // SITE-WIDE — Mouse Gradient (all pages)
+  // =====================================================
+  document.addEventListener('mousemove', e => {
+    document.body.style.setProperty('--mx', e.clientX + 'px');
+    document.body.style.setProperty('--my', e.clientY + 'px');
+  });
 }
-animCursor();
-
-// Cursor hover effects — class toggle for smooth CSS transition
-document.querySelectorAll('a, [data-tilt], .product-card, button, .cta-btn, .nav-cta, .link-btn').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    if (dot) dot.classList.add('hover');
-    if (ring) ring.classList.add('hover');
-  });
-  el.addEventListener('mouseleave', () => {
-    if (dot) dot.classList.remove('hover');
-    if (ring) ring.classList.remove('hover');
-  });
-});
-
-// =====================================================
-// SITE-WIDE — Mouse Gradient (all pages)
-// =====================================================
-document.addEventListener('mousemove', e => {
-  document.body.style.setProperty('--mx', e.clientX + 'px');
-  document.body.style.setProperty('--my', e.clientY + 'px');
-});
 
 
 // =====================================================
@@ -168,3 +172,33 @@ if (pageHero) {
   animParticles();
 }
 
+
+// ===== Mobile Hamburger Toggle (added later) =====
+(function() {
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  if (!hamburger || !navLinks) return;
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
+  // 메뉴 항목 클릭 시 자동 닫기 (드롭다운 토글 제외)
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (!link.classList.contains('dropdown-toggle')) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+
+  // 외부 클릭 시 닫기
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('open');
+    }
+  });
+})();
