@@ -10,127 +10,442 @@
 
   /* Mobile-only line break utility */
   .mo-only { display: none; }
-  @media (max-width: 900px) {
-    .mo-only { display: inline; }
+
+  /* Hero (허브 기준) */
+  .page-hero {
+    height: 50vh; min-height: 420px;
+    padding: 80px 60px 0;
   }
 
-  /* INTRO */
-  #wax-intro {
+  /* Philosophy */
+  #philosophy {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F9FC 100%);
     text-align: center;
-    background: var(--white);
   }
-  #wax-intro .section-desc { margin: 0 auto; }
-
-  /* SERVICE FULL LIST */
-  #wax-services {
-    background: linear-gradient(180deg, #EAF2F8 0%, #F5F9FC 100%);
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 50px auto 0;
   }
-  .wax-category {
-    margin-bottom: 80px;
+  .philo-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(140, 180, 213, 0.15);
+    border-radius: 16px;
+    padding: 40px 30px;
+    transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    will-change: transform;
   }
-  .wax-category:last-child { margin-bottom: 0; }
-  .wax-category-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; letter-spacing: 3px;
-    margin-bottom: 12px; color: var(--black);
-  }
-  .wax-category-desc {
-    font-size: 0.85rem; color: var(--gray); font-weight: 300;
-    margin-bottom: 36px;
-  }
-  .wax-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 24px; max-width: 1100px;
-  }
-  .wax-item {
-    background: rgba(255,255,255,0.8);
-    border: 1px solid rgba(140,180,213,0.12);
-    padding: 36px 28px;
-    transition: all 0.4s;
-    cursor: pointer;
-    border-radius: 12px;
-  }
-  .wax-item:hover {
+  .philo-card:hover {
     background: #fff;
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(140,180,213,0.15);
+    box-shadow: 0 16px 40px rgba(140, 180, 213, 0.12);
   }
-  .wax-item-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; letter-spacing: 2px;
-    margin-bottom: 10px;
-  }
-  .wax-item-desc {
-    font-size: 0.8rem; color: var(--gray); line-height: 1.7; font-weight: 300;
-  }
-  .wax-item-price {
-    display: inline-block; margin-top: 14px;
-    font-size: 0.75rem; color: var(--blue-dark);
-    letter-spacing: 1.5px; font-weight: 400;
-    padding: 4px 12px;
+  .philo-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 20px;
     border: 1px solid var(--blue);
-    border-radius: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    font-size: 1.1rem;
+  }
+  .philo-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 14px;
+  }
+  .philo-card p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.7;
+    font-weight: 300;
   }
 
-  /* PROCESS */
-  #wax-process {
+  /* Services */
+  #services {
+    background: linear-gradient(180deg, #F5F9FC 0%, #FFFFFF 100%);
     text-align: center;
   }
-  #wax-process .section-desc { margin: 0 auto 60px; }
-  .process-steps {
-    display: flex; justify-content: center; gap: 40px;
-    flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 50px auto 0;
+    text-align: left;
   }
-  .process-step {
-    flex: 1; min-width: 180px; max-width: 220px;
-    text-align: center;
+  .service-detail {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(140, 180, 213, 0.15);
+    border-radius: 20px;
+    padding: 50px 40px;
+    transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    will-change: transform;
   }
-  .step-num {
+  .service-detail:hover {
+    background: #fff;
+    box-shadow: 0 20px 50px rgba(140, 180, 213, 0.15);
+  }
+  .service-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem; color: var(--blue); font-weight: 300;
-    margin-bottom: 12px;
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--blue);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
   }
-  .step-title {
-    font-size: 0.9rem; font-weight: 500; letter-spacing: 1px;
+  .service-detail h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .service-sub {
+    font-size: 0.82rem;
+    color: var(--gray);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(140, 180, 213, 0.15);
+  }
+  .service-points {
+    list-style: none;
+    padding: 0;
+  }
+  .service-points li {
+    font-size: 0.82rem;
+    color: var(--gray);
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-weight: 300;
+  }
+  .service-points li::before {
+    content: '•';
+    color: var(--blue);
+    position: absolute;
+    left: 0;
+    font-size: 1rem;
+  }
+
+  /* Techniques (영상 섹션) */
+  #techniques {
+    background: linear-gradient(180deg, #FFFFFF 0%, #EAF2F8 100%);
+    text-align: center;
+  }
+  .techniques-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 50px auto 0;
+  }
+  .technique-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(140, 180, 213, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .technique-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(140, 180, 213, 0.15);
+  }
+  .technique-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    background: linear-gradient(135deg, #EAF2F8, #D5E4F2);
+    overflow: hidden;
+  }
+  .technique-video video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  .technique-video.has-video video { display: block; }
+  .technique-video.has-video .video-placeholder { display: none; }
+
+  .video-placeholder {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  .video-icon {
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    font-size: 1.2rem;
+  }
+  .video-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--blue);
+    letter-spacing: 4px;
+  }
+  .technique-info {
+    padding: 24px;
+    text-align: center;
+  }
+  .technique-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .technique-info p {
+    font-size: 0.82rem;
+    color: var(--gray);
+    font-weight: 300;
+  }
+  .techniques-note {
+    margin-top: 30px;
+    font-size: 0.78rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+    font-style: italic;
+  }
+
+  /* Owner Story */
+  #owner {
+    background: #FFFFFF;
+  }
+  .owner-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .owner-content .section-tag {
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  .owner-content .section-title {
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  .owner-desc {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 2;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+  .owner-desc strong {
+    color: var(--blue);
+    font-weight: 500;
+  }
+  .owner-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #EAF2F8, #D5E4F2);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--blue);
+    letter-spacing: 3px;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(180deg, #EAF2F8 0%, #FFFFFF 100%);
+    text-align: center;
+  }
+
+  /* Outline CTA button variant */
+  .cta-btn-outline {
+    display: inline-block;
+    padding: 16px 40px;
+    background: transparent; color: var(--blue-dark);
+    border: 1px solid var(--blue);
+    font-size: 0.82rem; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .cta-btn-outline:hover {
+    background: var(--blue); color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+
+  /* Dual CTA */
+  .dual-cta {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 40px;
+    max-width: 900px;
+    margin: 50px auto 0;
+  }
+  .cta-option {
+    flex: 1;
+    text-align: center;
+    padding: 30px;
+  }
+  .cta-option-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--black);
     margin-bottom: 8px;
   }
-  .step-desc {
-    font-size: 0.78rem; color: var(--gray); line-height: 1.6; font-weight: 300;
+  .cta-option-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 24px;
+    font-weight: 300;
   }
-
-  /* FAQ */
-  #wax-faq {
-    background: linear-gradient(180deg, #F4F7FA, var(--white));
-    max-width: 800px; margin: 0 auto;
-    padding: 120px 60px;
+  .cta-divider {
+    width: 1px;
+    background: rgba(140, 180, 213, 0.25);
   }
-  .faq-item {
-    border-bottom: 1px solid var(--gray-light);
-    padding: 24px 0;
-  }
-  .faq-q {
-    font-size: 0.95rem; font-weight: 500; letter-spacing: 0.5px;
-    cursor: pointer; display: flex; justify-content: space-between;
-    align-items: center; transition: color 0.3s;
-  }
-  .faq-q:hover { color: var(--blue-dark); }
-  .faq-q::after {
-    content: '+'; font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; color: var(--blue); font-weight: 300;
-  }
-  .faq-a {
-    font-size: 0.85rem; color: var(--gray); line-height: 1.8;
-    font-weight: 300; margin-top: 14px;
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
-  .faq-item.open .faq-a { max-height: 200px; }
-  .faq-item.open .faq-q::after { content: '−'; }
 
   @media (max-width: 900px) {
-    .wax-grid { grid-template-columns: 1fr; max-width: 400px; }
-    .process-steps { gap: 24px; }
-    #wax-faq { padding: 80px 24px; }
+    .mo-only { display: inline; }
+    .page-hero { height: auto; min-height: 320px; padding: 100px 24px 40px; }
+    .page-hero-title { font-size: 1.8rem !important; line-height: 1.3; }
+    .philosophy-grid,
+    .services-grid,
+    .techniques-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .service-detail {
+      padding: 36px 28px;
+    }
+    .owner-wrap {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .owner-content .section-tag,
+    .owner-content .section-title {
+      text-align: center;
+    }
+    .dual-cta {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .cta-divider {
+      width: 100%;
+      height: 1px;
+    }
+    .section-title { font-size: 1.6rem !important; line-height: 1.3; }
+  }
+
+  /* ===== NAV DROPDOWN (shared pattern) ===== */
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .dropdown-toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .nav-links .dropdown-toggle::before {
+    content: ''; position: absolute; left: -8px; right: -8px;
+    top: 100%; height: 18px;
+  }
+  .dropdown-caret {
+    display: inline-block; font-size: 0.6rem; line-height: 1;
+    transform: translateY(1px); transition: transform 0.3s ease;
+  }
+  .nav-links .has-dropdown:hover .dropdown-caret { transform: translateY(1px) rotate(-180deg); }
+  .dropdown-menu {
+    position: absolute; top: calc(100% + 14px); left: -18px;
+    min-width: 220px; padding: 10px 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(140,180,213,0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(140,180,213,0.18);
+    list-style: none;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    z-index: 1001;
+  }
+  .nav-links .has-dropdown:hover .dropdown-menu,
+  .nav-links .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+  .dropdown-menu li { margin: 0; }
+  .dropdown-menu a {
+    display: block; padding: 11px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.98rem; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: none;
+    color: var(--black); white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+  }
+  .dropdown-menu a::after { display: none; }
+  .dropdown-menu a:hover {
+    color: var(--blue-dark);
+    background: rgba(224,237,245,0.5);
+    padding-left: 28px;
+    transform: none; box-shadow: none;
+  }
+
+  /* Manager button — outline style */
+  .nav-manager {
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .nav-manager:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(140,180,213,0.3);
+  }
+  .nav-manager:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 8px rgba(140,180,213,0.2);
   }
 </style>
 </head>
@@ -139,193 +454,252 @@
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<!-- NAV -->
 <nav id="nav">
   <a href="index.html" class="nav-logo"><img src="은아하다 로고 수정.svg" alt="Eun A Hada" style="height:44px;width:auto;"></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="waxing.html" class="active">Waxing</a></li>
-    <li><a href="education.html">Education</a></li>
-    <li><a href="product.html">Products</a></li>
+    <li class="has-dropdown">
+      <a href="training.html" class="dropdown-toggle">Training <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="training-browxing.html">Browxing 도입반</a></li>
+        <li><a href="training-startup.html">왁싱 창업반</a></li>
+        <li><a href="training-oneday.html">One-day 교육</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="products.html" class="dropdown-toggle">Product <span class="dropdown-caret">▾</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="product-browxing.html">Browxing</a></li>
+        <li><a href="product.html">Clear Wax</a></li>
+      </ul>
+    </li>
+    <li><a href="partnership.html">Partnership</a></li>
+    <li><a href="qna.html">Q&amp;A</a></li>
+    <li><a href="manager.html" class="mobile-manager">Manager</a></li>
   </ul>
-  <a href="index.html#cta" class="nav-cta">Contact</a>
+  <a href="manager.html" class="nav-manager">Manager</a>
+  <button class="nav-hamburger" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section class="page-hero">
   <div class="page-hero-content">
-    <p class="page-hero-tag">Waxing Services</p>
-    <h1 class="page-hero-title">Premium <em>Waxing</em></h1>
+    <p class="page-hero-tag">Our Services</p>
+    <h1 class="page-hero-title">프리미엄<br class="mo-only"> <em>왁싱 시술</em></h1>
     <div class="page-hero-line"></div>
-    <p class="page-hero-desc">전문가의 손끝에서 완성되는 매끈한 피부</p>
+    <p class="page-hero-desc">정성과 기술로 완성하는 편안한 경험</p>
   </div>
 </section>
 
-<!-- INTRO -->
-<section id="wax-intro">
-  <p class="section-tag reveal">Our Services</p>
-  <h2 class="section-title reveal">은아하다만의<br class="mo-only"> 프리미엄 왁싱</h2>
-  <p class="section-desc reveal">
-    8년 이상의 전문 경력, 엄선된 왁스 원료, 그리고 고객 맞춤 시술.
-    은아하다에서는 시술 전 충분한 상담을 통해 피부 타입에 맞는 최적의 방법을 제안합니다.
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <p class="section-tag reveal">Our Philosophy</p>
+  <h2 class="section-title reveal">진심을 담은<br class="mo-only"> <em>시술</em></h2>
+
+  <div class="philosophy-grid">
+    <div class="philo-card reveal reveal-delay-1" data-tilt>
+      <div class="philo-icon">✦</div>
+      <h3>섬세함</h3>
+      <p>모든 고객의 피부와 모질을 세심하게 관찰하고 맞춤 시술</p>
+    </div>
+    <div class="philo-card reveal reveal-delay-2" data-tilt>
+      <div class="philo-icon">✦</div>
+      <h3>정직함</h3>
+      <p>검증된 제품과 위생 관리, 안전을 최우선으로</p>
+    </div>
+    <div class="philo-card reveal reveal-delay-3" data-tilt>
+      <div class="philo-icon">✦</div>
+      <h3>전문성</h3>
+      <p>8년의 현장 경험과 끊임없는 연구로 쌓은 노하우</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-tag reveal">Services</p>
+  <h2 class="section-title reveal">부위별<br class="mo-only"> <em>전문 시술</em></h2>
+  <p class="section-desc reveal">Face · Body · Brazilian — 모든 영역의 프로페셔널</p>
+
+  <div class="services-grid">
+    <div class="service-detail reveal" data-tilt>
+      <div class="service-number">01</div>
+      <h3>Face Waxing</h3>
+      <p class="service-sub">페이스 왁싱</p>
+      <p class="service-desc">
+        눈썹 · 인중 · 이마 라인까지 섬세하게.
+        얼굴의 모든 결을 정돈하여 자연스러운 아름다움을 완성합니다.
+      </p>
+      <ul class="service-points">
+        <li>눈썹 디자인 · 수염 정리</li>
+        <li>인중 · 턱 · 이마 라인</li>
+        <li>민감한 부위 전용 왁스 사용</li>
+      </ul>
+    </div>
+
+    <div class="service-detail reveal" data-tilt>
+      <div class="service-number">02</div>
+      <h3>Body Waxing</h3>
+      <p class="service-sub">바디 왁싱</p>
+      <p class="service-desc">
+        팔 · 다리 · 겨드랑이 · 등까지.
+        넓은 부위도 빠르고 깨끗하게, 부드러운 피부를 선사합니다.
+      </p>
+      <ul class="service-points">
+        <li>팔 · 다리 전체 또는 부분</li>
+        <li>겨드랑이 · 등 · 가슴</li>
+        <li>저자극 왁스로 피부 보호</li>
+      </ul>
+    </div>
+
+    <div class="service-detail reveal" data-tilt>
+      <div class="service-number">03</div>
+      <h3>Brazilian</h3>
+      <p class="service-sub">브라질리언</p>
+      <p class="service-desc">
+        프라이빗한 공간에서 편안하게.
+        숙련된 전문가의 안전하고 위생적인 시술.
+      </p>
+      <ul class="service-points">
+        <li>1:1 완전 프라이빗 공간</li>
+        <li>위생 프로토콜 준수</li>
+        <li>민감 피부 전용 관리</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUES -->
+<section id="techniques">
+  <p class="section-tag reveal">Techniques</p>
+  <h2 class="section-title reveal">프로의<br class="mo-only"> <em>손길</em></h2>
+  <p class="section-desc reveal">시술 과정을 직접 확인하세요</p>
+
+  <div class="techniques-grid">
+    <div class="technique-card reveal reveal-delay-1">
+      <div class="technique-video">
+        <video autoplay muted loop playsinline poster="videos/face-waxing-poster.jpg">
+          <source src="videos/face-waxing.mp4" type="video/mp4">
+        </video>
+        <div class="video-placeholder">
+          <span class="video-icon">▶</span>
+          <span class="video-label">FACE WAXING</span>
+        </div>
+      </div>
+      <div class="technique-info">
+        <h3>Face Waxing</h3>
+        <p>섬세한 얼굴 왁싱 과정</p>
+      </div>
+    </div>
+
+    <div class="technique-card reveal reveal-delay-2">
+      <div class="technique-video">
+        <video autoplay muted loop playsinline poster="videos/body-waxing-poster.jpg">
+          <source src="videos/body-waxing.mp4" type="video/mp4">
+        </video>
+        <div class="video-placeholder">
+          <span class="video-icon">▶</span>
+          <span class="video-label">BODY WAXING</span>
+        </div>
+      </div>
+      <div class="technique-info">
+        <h3>Body Waxing</h3>
+        <p>넓은 부위 빠르고 깔끔하게</p>
+      </div>
+    </div>
+
+    <div class="technique-card reveal reveal-delay-3">
+      <div class="technique-video">
+        <video autoplay muted loop playsinline poster="videos/brazilian-poster.jpg">
+          <source src="videos/brazilian.mp4" type="video/mp4">
+        </video>
+        <div class="video-placeholder">
+          <span class="video-icon">▶</span>
+          <span class="video-label">BRAZILIAN</span>
+        </div>
+      </div>
+      <div class="technique-info">
+        <h3>Brazilian</h3>
+        <p>프라이빗 전문 시술</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="techniques-note reveal">
+    * 시술 영상은 준비 중입니다
   </p>
 </section>
 
-<!-- SERVICES FULL -->
-<section id="wax-services">
-
-  <!-- FACE -->
-  <div class="wax-category reveal">
-    <h3 class="wax-category-title">Face Waxing</h3>
-    <p class="wax-category-desc">섬세한 터치로 완성하는 페이스 라인</p>
-    <div class="wax-grid">
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Eyebrow</h4>
-        <p class="wax-item-desc">자연스러운 눈썹 라인 정리. 얼굴형에 맞는 맞춤 디자인.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
+<!-- OWNER -->
+<section id="owner">
+  <div class="owner-wrap">
+    <div class="owner-content reveal">
+      <p class="section-tag">About the Founder</p>
+      <h2 class="section-title">기술의<br class="mo-only"> <em>원천</em></h2>
+      <p class="owner-desc">
+        8년간 현장에서 쌓은 노하우.<br>
+        매일 고객을 만나며 검증한 기술.<br>
+        이것이 <strong>은아하다</strong>가 전수하는 기술입니다.
+      </p>
+      <a href="about.html" class="cta-btn cta-btn-outline">원장 소개 보기 →</a>
+    </div>
+    <div class="owner-image reveal">
+      <div class="owner-image-placeholder">
+        <span>박은아 원장</span>
       </div>
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Upper Lip</h4>
-        <p class="wax-item-desc">인중 잔털 제거로 깨끗한 입술 라인.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Full Face</h4>
-        <p class="wax-item-desc">이마, 볼, 턱 라인까지 풀 페이스 왁싱.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- BODY -->
-  <div class="wax-category reveal">
-    <h3 class="wax-category-title">Body Waxing</h3>
-    <p class="wax-category-desc">부드럽고 깨끗한 바디 라인</p>
-    <div class="wax-grid">
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Arms</h4>
-        <p class="wax-item-desc">팔 전체 또는 하완/상완 선택 가능.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Legs</h4>
-        <p class="wax-item-desc">다리 전체 또는 하퇴/상퇴 선택 가능.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Underarm</h4>
-        <p class="wax-item-desc">겨드랑이 왁싱으로 깔끔한 관리.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- BRAZILIAN -->
-  <div class="wax-category reveal">
-    <h3 class="wax-category-title">Brazilian Waxing</h3>
-    <p class="wax-category-desc">프라이빗한 공간에서 편안하게</p>
-    <div class="wax-grid">
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Brazilian Basic</h4>
-        <p class="wax-item-desc">기본 브라질리언 왁싱. 숙련된 전문가의 안전한 시술.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-      <div class="wax-item" data-tilt>
-        <h4 class="wax-item-name">Brazilian Full</h4>
-        <p class="wax-item-desc">전체 브라질리언 왁싱. 꼼꼼하고 깨끗한 마무리.</p>
-        <span class="wax-item-price">카카오톡 문의</span>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- PROCESS -->
-<section id="wax-process">
-  <p class="section-tag reveal">Process</p>
-  <h2 class="section-title reveal">시술 과정</h2>
-  <p class="section-desc reveal">은아하다의 체계적인 왁싱 프로세스</p>
-  <div class="process-steps">
-    <div class="process-step reveal reveal-delay-1">
-      <div class="step-num">01</div>
-      <h4 class="step-title">상담</h4>
-      <p class="step-desc">피부 타입과 고민을 파악하는 1:1 맞춤 상담</p>
-    </div>
-    <div class="process-step reveal reveal-delay-2">
-      <div class="step-num">02</div>
-      <h4 class="step-title">준비</h4>
-      <p class="step-desc">시술 부위 클렌징과 피부 보호 준비</p>
-    </div>
-    <div class="process-step reveal reveal-delay-3">
-      <div class="step-num">03</div>
-      <h4 class="step-title">시술</h4>
-      <p class="step-desc">전문 왁스로 정밀하고 안전한 시술 진행</p>
-    </div>
-    <div class="process-step reveal reveal-delay-4">
-      <div class="step-num">04</div>
-      <h4 class="step-title">케어</h4>
-      <p class="step-desc">시술 후 진정 케어와 홈케어 안내</p>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="wax-faq">
-  <p class="section-tag reveal">FAQ</p>
-  <h2 class="section-title reveal">자주 묻는 질문</h2>
-
-  <div class="faq-item reveal">
-    <div class="faq-q">왁싱이 처음인데 아프지 않을까요?</div>
-    <div class="faq-a">
-      처음 시술 시 약간의 따끔함이 있을 수 있지만, 숙련된 전문가의 빠르고 정확한 시술로
-      통증을 최소화합니다. 시술 횟수가 늘어날수록 모질이 가늘어져 통증이 줄어듭니다.
-    </div>
-  </div>
-  <div class="faq-item reveal">
-    <div class="faq-q">모발 길이가 어느 정도여야 하나요?</div>
-    <div class="faq-a">
-      최소 0.5cm 이상 자란 상태가 이상적입니다.
-      너무 짧으면 왁스가 잘 잡지 못할 수 있어요. 시술 전 면도하지 마세요.
-    </div>
-  </div>
-  <div class="faq-item reveal">
-    <div class="faq-q">시술 주기는 어떻게 되나요?</div>
-    <div class="faq-a">
-      보통 3~5주 간격을 추천드립니다. 부위와 개인 모발 성장 속도에 따라
-      달라질 수 있으며, 상담 시 맞춤 주기를 안내해드립니다.
-    </div>
-  </div>
-  <div class="faq-item reveal">
-    <div class="faq-q">예민한 피부도 왁싱이 가능한가요?</div>
-    <div class="faq-a">
-      네, 가능합니다. 은아하다에서는 민감성 피부 전용 왁스를 사용하며,
-      시술 전 패치 테스트를 통해 안전하게 진행합니다.
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
-  <div class="cta-content">
-    <p class="section-tag reveal">Book Now</p>
-    <h2 class="cta-title reveal">왁싱 예약</h2>
-    <p class="cta-desc reveal">카카오톡으로 편하게 상담 및 예약하세요</p>
-    <a href="tel:010-9944-7901" class="cta-btn reveal">예약 문의</a>
-    <p class="cta-contact reveal">Tel. 010-9944-7901</p>
+  <p class="section-tag reveal">Next Step</p>
+  <h2 class="section-title reveal">다음 <em>한 걸음</em></h2>
+
+  <div class="dual-cta reveal">
+    <div class="cta-option">
+      <p class="cta-option-label">고객이신가요?</p>
+      <p class="cta-option-desc">전문가의 손길을 경험하세요</p>
+      <a href="#" class="cta-btn">예약 문의 →</a>
+    </div>
+
+    <div class="cta-divider"></div>
+
+    <div class="cta-option">
+      <p class="cta-option-label">원장이신가요?</p>
+      <p class="cta-option-desc">이 기술을 직접 배워보세요</p>
+      <a href="training.html" class="cta-btn cta-btn-outline">교육 과정 보기 →</a>
+    </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <p>&copy; 2024 Euna Hada. All rights reserved. &nbsp;|&nbsp; <a href="#">Instagram</a></p>
 </footer>
 
-<script src="js/common.js"></script>
 <script>
-// FAQ toggle
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    q.parentElement.classList.toggle('open');
-  });
-});
+  // Disable tilt on mobile — strip data-tilt before common.js attaches listeners
+  if (window.innerWidth <= 900) {
+    document.querySelectorAll('[data-tilt]').forEach(el => el.removeAttribute('data-tilt'));
+  }
 </script>
+<script>
+  // 영상 파일 존재 확인 — 없으면 플레이스홀더 유지
+  (function() {
+    document.querySelectorAll('.technique-video video').forEach(video => {
+      video.addEventListener('loadeddata', () => {
+        video.closest('.technique-video').classList.add('has-video');
+      });
+      video.addEventListener('error', () => {
+        // 영상 파일 없음 — 플레이스홀더 유지
+      });
+    });
+  })();
+</script>
+<script src="js/common.js"></script>
 </body>
 </html>
