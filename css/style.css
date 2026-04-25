@@ -317,6 +317,7 @@ a:active, button:active, .cta-btn:active, .nav-cta:active, .link-btn:active {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
   .nav-links { display: none; }
   section { padding: 80px 24px; }
   .page-hero { height: 40vh; min-height: 280px; }
@@ -354,6 +355,14 @@ a:active, button:active, .cta-btn:active, .nav-cta:active, .link-btn:active {
 }
 .nav-hamburger.active span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+.nav-hamburger:hover,
+.nav-hamburger:active,
+.nav-hamburger:focus {
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  outline: none;
 }
 
 @media (min-width: 901px) {
