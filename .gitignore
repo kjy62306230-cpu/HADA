@@ -14,3 +14,21 @@ Thumbs.db
 *.swo
 *~
 *.log
+
+# Backup files
+*backup*.html
+*-backup.*
+*.bak
+*-old.*
+*-original.*
+
+# Unused logo variations (keep only "은아하다 로고 수정.svg")
+Eun A hada Logo.*
+New logo-*.png
+New logo-*.svg
+로고 은아하다 수정본.*
+logo.png
+nav-logo.png
+
+# Internal scratchpad
+logo-concepts.html
