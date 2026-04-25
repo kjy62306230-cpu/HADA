@@ -1,3 +1,16 @@
+# Claude Code internal
+.claude/
+CLAUDE.md
+
+# Working folders (not for deployment)
+정리/
+
+# OS files
 .DS_Store
 Thumbs.db
+
+# Editor temp files
+*.swp
+*.swo
+*~
 *.log
